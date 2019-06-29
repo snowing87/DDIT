@@ -1,0 +1,6 @@
+package roomInfo.dao;
+
+public interface IRoomInfoDao {
+
+
+}

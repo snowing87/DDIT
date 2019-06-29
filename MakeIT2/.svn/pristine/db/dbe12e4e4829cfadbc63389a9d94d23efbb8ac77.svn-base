@@ -1,0 +1,57 @@
+package owner.service;
+
+import owner.dao.IRegistRoomDao;
+import owner.dao.RegistRoomDaoImpl;
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public class RegistRoomServiceImpl implements IRegistRoomService{
+	private static RegistRoomServiceImpl service;
+	private IRegistRoomDao dao = RegistRoomDaoImpl.getInstance();
+	
+	/**
+	 * 싱글톤
+	 * @return
+	 */
+	public static IRegistRoomService getInstance() {
+		if(service==null) {
+			service = new RegistRoomServiceImpl();
+		}
+		return service;
+	}
+	
+	/**
+	 * 방 등록
+	 */
+	@Override
+	public int insertRegistRoom(RoomVO rv) {
+		return dao.insertRegistRoom(rv);
+	}
+
+	@Override
+	public int insertImageUpload1(RoomImgVO riv) {
+		// TODO Auto-generated method stub
+		return dao.insertImageUpload1(riv);
+	}
+
+	@Override
+	public int insertImageUpload2(RoomImgVO riv) {
+		// TODO Auto-generated method stub
+		return dao.insertImageUpload2(riv);
+	}
+
+	@Override
+	public int insertImageUpload3(RoomImgVO riv) {
+		// TODO Auto-generated method stub
+		return dao.insertImageUpload3(riv);
+	}
+	
+	
+	@Override
+	public String getAddress(String searchStr) {
+		return dao.getAddress(searchStr);
+	}
+	
+	
+
+}

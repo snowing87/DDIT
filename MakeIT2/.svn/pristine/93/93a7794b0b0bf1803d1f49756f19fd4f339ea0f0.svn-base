@@ -1,0 +1,118 @@
+package admin.dao;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import main.view.BuildedSqlMapConfig;
+import vo.MemberVO;
+
+public class MemberDaoImpl implements IMemberDao {
+	private static IMemberDao dao;
+	private SqlMapClient client;
+	
+	private MemberDaoImpl() {
+		client = BuildedSqlMapConfig.getInstance();
+	}
+	
+	public static IMemberDao getInstance() {
+		if(dao==null) {
+			dao = new MemberDaoImpl();
+		}
+		return dao;
+	}
+	
+	/**
+	 * 회원 조회
+	 */
+	@Override
+	public List<MemberVO> getAllMemberList() {
+		List<MemberVO> memberList = null;
+			
+			try {
+				memberList = client.queryForList("member.getAllMember");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+			return memberList;
+		}
+	
+	/**
+	 * 회원 등록
+	 */
+	@Override
+	public int insertMember(MemberVO mv) {
+		
+		int cnt = 0;
+		
+		try {
+			
+			Object obj = client.insert("member.insertMember",mv); //namespace + xml insert에있는 id
+			
+			if(obj == null) {
+				cnt = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+	/**
+	 * 주소 찾기
+	 */
+	@Override
+	public String getAddress(String searchStr) {
+		String address = "";
+		searchStr = searchStr.replaceAll(" ", "%20");
+		String urlLink = "https://maps.googleapis.com/maps/api/geocode/json?address=" + searchStr
+				+ "&key=AIzaSyCiNE-lKV0z0cU8WCjFDw72ojQ0POpY-Po";
+		try {
+			URL url = new URL(urlLink);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+
+			BufferedReader bin = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuffer sb = new StringBuffer();
+			String line;
+
+			while ((line = bin.readLine()) != null) {
+				sb.append(line);
+			}
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObj;
+			jsonObj = (JSONObject) jsonParser.parse(sb.toString());
+
+			JSONArray jsonArray = (JSONArray) jsonObj.get("results");
+			
+			JSONObject tempObj = (JSONObject) jsonArray.get(0);
+			address = (String)tempObj.get("formatted_address");
+
+			System.out.println(address);
+			
+			
+
+		} catch(IndexOutOfBoundsException e) {
+			// 이 예외는 검색한 결과가 없을 때 나타납니다
+			return null;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return address;
+	}
+	
+	
+
+}

@@ -1,0 +1,5 @@
+package siteInfo.chat;
+
+public class ChatServer {
+
+}

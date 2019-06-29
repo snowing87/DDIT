@@ -1,0 +1,30 @@
+package searchRoom.dao;
+
+import java.util.Map;
+
+import javafx.collections.ObservableList;
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public interface ISearchRoomDao {
+	/**
+	 * 메인 화면에 보여줄 방을 가져온다
+	 * @return
+	 */
+	ObservableList<RoomVO> getRoomList();
+	
+	/**
+	 * 방 이미지 1개를 가져온다
+	 * @return
+	 */
+	RoomImgVO getRoomImg(int room_id);
+
+	/**
+	 * 검색어를 받아와 좌표값을 넘겨준다.
+	 * key : lat, lng
+	 * @param searchStr
+	 * @return
+	 */
+	Map<String, String> getLatLng(String searchStr);
+	
+}

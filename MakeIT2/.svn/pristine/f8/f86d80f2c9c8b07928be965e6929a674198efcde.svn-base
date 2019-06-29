@@ -1,0 +1,65 @@
+package member.mypage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+
+public class MemberMyPageController implements Initializable{
+	@FXML
+    private JFXComboBox<String> CbPhone1;
+
+    @FXML
+    private JFXButton btnPhone;
+
+    @FXML
+    private JFXTextField tfPhone3;
+
+    @FXML
+    private JFXTextField tfPhone2;
+
+    @FXML
+    private JFXComboBox<String> cbMemberType;
+
+    @FXML
+    private JFXTextField tfCurrentPw;
+
+    @FXML
+    private JFXTextField tfUpdatePw;
+
+    @FXML
+    private JFXTextField tfEmail;
+
+    @FXML
+    private JFXTextField tfMemberName;
+
+    @FXML
+    void onPhoneClick(ActionEvent event) {
+    }
+    
+    @FXML
+    void onCancelClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onCommitClick(ActionEvent event) {
+
+    }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ObservableList<String> phoneList = FXCollections.observableArrayList();
+		phoneList.addAll("010", "011", "016", "017", "018", "019");
+		CbPhone1.setItems(phoneList);
+		
+	}
+}

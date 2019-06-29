@@ -1,0 +1,94 @@
+package member.favoriteRoom.view;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+import javafx.fxml.Initializable;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import main.view.MainViewController;
+import member.favoriteRoom.service.ISearchLogService;
+import member.favoriteRoom.service.ISearchLogServiceImpl;
+import searchRoom.service.ISearchRoomService;
+import searchRoom.service.SearchRoomServiceImpl;
+import searchRoom.view.CellController;
+import siteInfo.service.ISiteInfoService;
+import siteInfo.service.ISiteInfoServiceImpl;
+import siteInfo.siteInfo.SiteInfoController;
+import vo.MemberVO;
+import vo.RoomImgVO;
+import vo.RoomVO;
+import vo.SearchLogVO;
+import javafx.scene.layout.FlowPane;
+
+public class FavoriteRoomController implements Initializable {
+	
+	ISearchLogService service = ISearchLogServiceImpl.getInstance();
+	
+	MemberVO currentMember = MainViewController.getCurrentMember();
+	SiteInfoController sic = SiteInfoController.getInstance();
+	
+	ObservableList<RoomVO> roomList;
+	
+	@FXML 
+	private JFXButton btn_recent;
+	@FXML 
+	private BorderPane Borderpane;
+	@FXML 
+	private JFXButton btn_favorite;
+	@FXML
+	private Label lb_cnt;
+	@FXML
+	private Label lb_category;
+	@FXML
+	private VBox vboxlist;
+	
+	@FXML
+    void btn_recent_Action(ActionEvent event) {
+		
+    }
+
+    @FXML
+    void btn_favorite(ActionEvent event) {
+    	
+    }
+    
+    //완성해야합니다!!!
+	/*private void setDataList(ObservableList<SearchLogVO> list) {
+		try {
+			FXMLLoader loader;
+			FavoriteCellController favoriteCellController;
+			Parent parent;
+			for(int i; i<list.size(); i++) {
+				SearchLogVO slv = list.get(i);
+				loader = new FXMLLoader(getClass().getResource("member/favoriteRoom/view/cell.fxml"));
+				parent = loader.load();
+				favoriteCellController = loader.getController();
+	//			favoriteCellController.setItem(slv, i); // setItem을 만들어야합니다!!
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}*/
+    
+    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+
+}

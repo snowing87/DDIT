@@ -1,0 +1,34 @@
+package member.service;
+
+import java.sql.SQLException;
+
+import member.dao.IMemberDao;
+import member.dao.IMemberDaoImpl;
+
+public class IMemberServiceImpl implements IMemberService{
+
+	private static IMemberServiceImpl service;
+	private IMemberDao dao;
+	
+	private IMemberServiceImpl() {
+		dao=IMemberDaoImpl.getInstance();
+	}
+	
+	public static IMemberService getInstance() {
+		if(service==null) {
+			service = new IMemberServiceImpl();
+		}
+		return service;
+	}
+
+	@Override
+	public int checkDuplication(String id) {
+		int chk = 0;
+		try {
+			chk = dao.checkDuplication(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return chk;
+	}
+}

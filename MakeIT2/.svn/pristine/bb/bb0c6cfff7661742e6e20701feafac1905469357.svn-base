@@ -1,0 +1,43 @@
+package siteInfo.inquiry;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+
+public class InquiryController implements Initializable {
+	
+	@FXML
+    private JFXButton btnSendInquiry;
+
+    @FXML
+    private JFXButton btnRequestChat;
+
+    @FXML
+    private JFXTextArea tfIquiryContent;
+
+    @FXML
+    private JFXTextField tfIquiryTitle;
+
+    @FXML
+    void onSendInquiry(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onRequestChat(ActionEvent event) {
+
+    }
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+
+}

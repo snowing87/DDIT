@@ -1,0 +1,21 @@
+package admin.service;
+
+
+
+import java.util.List;
+
+import vo.MemberVO;
+
+public interface IMemberService  {
+	
+	public List<MemberVO> getAllMemberList();
+	
+	public int insertMember(MemberVO mv);
+	
+	/**
+	 * 방 주소를 검색해 상세주소를 반환하는 메서드
+	 * @param searchStr
+	 * @return
+	 */
+	public String getAddress(String searchStr);
+}

@@ -1,0 +1,26 @@
+package siteInfo.dao;
+
+import java.sql.SQLException;
+
+import javafx.collections.ObservableList;
+import vo.BoardVO;
+
+public interface ISiteInfoDao {
+	
+	/**
+	 * 게시글을 등록하는 메서드
+	 * @author PC-08
+	 * @param bv
+	 * @return
+	 * @throws SQLException 
+	 */
+	int upload(BoardVO bv) throws SQLException;
+	
+	/**
+	 * 게시글을 조회하는 메서드
+	 * @author PC-08 
+	 * @return
+	 */
+	ObservableList<BoardVO> getNoticeBoardList() throws SQLException;
+
+}

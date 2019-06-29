@@ -1,0 +1,255 @@
+package member.signup;
+
+import java.net.URL;
+import java.time.LocalDate;
+import java.sql.Date;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
+import member.service.IMemberService;
+import member.service.IMemberServiceImpl;
+import vo.MemberVO;
+
+public class SignUpController implements Initializable{
+	
+	@FXML
+	private JFXButton btnClose;
+	
+	@FXML
+	private JFXTextField tfMemId;
+	
+	@FXML
+	private JFXButton btnDuplCheck;
+	
+	@FXML
+	private JFXTextField tfMemName;
+	
+	@FXML
+	private JFXTextField tfMail1;
+	
+	@FXML
+	private JFXComboBox<?> cbMail2;
+	
+	@FXML
+	private JFXButton btnReqIdNum;
+	
+	@FXML
+	private JFXTextField tfIdNum;
+
+	@FXML
+    private JFXButton btnConfIdNum;
+	
+	@FXML
+	private JFXTextField tfMemPw;
+	
+	@FXML
+	private JFXTextField tfConfMemPw;
+	
+	@FXML
+	private JFXComboBox<?> cbMemPhone1;
+	
+	@FXML
+	private JFXTextField tfMemPhone2;
+	
+	@FXML
+	private JFXTextField tfMemPhone3;
+	
+	@FXML
+	private JFXTextField tfMemAddr1;
+	
+	@FXML
+	private JFXButton btnSearchAddr;
+	
+	@FXML
+	private JFXTextField tfMemAddr2;
+	
+	@FXML
+	private DatePicker dpMemBirth;
+
+    @FXML
+    private JFXComboBox<?> cbMemAuth;
+    
+    @FXML
+    private JFXButton btnSignUp;
+    
+    Date birth = null;
+    int idChk=0;
+    int emailChk=0;
+    int addrChk=0;
+    
+    @FXML
+    void close(ActionEvent event) {
+    	
+    }
+    
+    @FXML
+    void checkDuplication(ActionEvent event) {
+    	
+    	String id = tfMemId.getText();
+    	
+    	IMemberService service = IMemberServiceImpl.getInstance();
+    	int chk = service.checkDuplication(id);
+    	
+    	if(chk>0) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("ERROR");
+    		error.setContentText("동일한 아이디가 존재합니다. 다시 입력해주세요.");
+    		error.showAndWait();
+    		tfMemId.setText(null);
+    		idChk=0;
+    	}else {
+    		Alert conf = new Alert(AlertType.CONFIRMATION);
+    		conf.setTitle("CONFIRMATION");
+    		conf.setContentText("사용할 수 있는 아이디입니다. 사용하시겠습니까?");
+    		
+    		ButtonType btnResult = conf.showAndWait().get();
+    		if(btnResult==ButtonType.OK) {
+    			tfMemId.setText(id);
+    			idChk=1;
+    		}else {
+    			tfMemId.setText(null);
+    			idChk=0;
+    		}
+    	}
+    }
+    
+    @FXML
+    void requestIdNum(ActionEvent event) {
+    	
+    }
+
+
+    @FXML
+    void confirmIdNum(ActionEvent event) {
+    	emailChk=1;
+    }
+
+    @FXML
+    void searchAddress(ActionEvent event) {
+    	addrChk=1;
+    }
+    
+    @FXML
+    void onDatePicked(ActionEvent event) {
+    	LocalDate date =  dpMemBirth.getValue();
+    	Date sqlDate = Date.valueOf(date);
+    	birth = sqlDate;
+    }
+
+    @FXML
+    void signUp(ActionEvent event) {
+    	String id = tfMemId.getText().trim();
+    	String name = tfMemName.getText().trim();
+    	String mail1 = tfMail1.getText().trim();
+    	String mail2 = (String) cbMail2.getSelectionModel().getSelectedItem();
+    	String email = mail1+"@"+mail2;
+    	String pw = tfMemPw.getText().trim();
+    	String pw2 = tfConfMemPw.getText().toString().trim();
+    	String phone1 = (String) cbMemPhone1.getSelectionModel().getSelectedItem(); 
+    	String phone2 = tfMemPhone2.getText().trim();
+    	String phone3 = tfMemPhone3.getText().trim();
+    	String phoneNum = phone1+"-"+phone2+"-"+phone3;
+    	String addr1 = tfMemAddr1.getText().trim();
+    	String addr2 = tfMemAddr2.getText().trim();
+    	
+    	String auth = (String) cbMemAuth.getSelectionModel().getSelectedItem();
+    	
+    	IMemberService service = IMemberServiceImpl.getInstance();
+    	
+    	if(id.isEmpty()) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("회원가입 실패");
+    		error.setContentText("아이디를 입력해주세요");
+    		error.showAndWait();
+    	}else if(idChk==0) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("회원가입 실패");
+    		error.setContentText("아이디 중복 여부를 확인해주세요.");
+    		error.showAndWait();
+    	}
+//    	else if(mail1.isEmpty()) {
+//    		Alert error = new Alert(AlertType.ERROR);
+//    		error.setTitle("회원가입 실패");
+//    		error.setContentText("이메일 주소를 입력해주세요");
+//    		error.showAndWait();
+//    	}else if(emailChk==0) {
+//    		Alert error = new Alert(AlertType.ERROR);
+//    		error.setTitle("회원가입 실패");
+//    		error.setContentText("이메일 인증을 해주세요.");
+//    		error.showAndWait();
+//    	}
+    	else if(pw.isEmpty()) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("회원가입 실패");
+    		error.setContentText("비밀번호를 입력해주세요");
+    		error.showAndWait();
+    	}else if(!pw.equals(pw2)) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("회원가입 실패");
+    		error.setContentText("비밀번호와 비밀번호 확인이 다릅니다. 다시 입력해주세요.");
+    		error.showAndWait();
+    		pw=null;
+    		pw2=null;
+    	}
+//    	else if(phone1.isEmpty()||phone2.trim().isEmpty()||phone3.trim().isEmpty()) {
+//    		Alert error = new Alert(AlertType.ERROR);
+//    		error.setTitle("회원가입 실패");
+//    		error.setContentText("핸드폰 번호를 입력해주세요.");
+//    		error.showAndWait();
+//    	}else if(addr1.isEmpty()||addr2.trim().isEmpty()) {
+//    		Alert error = new Alert(AlertType.ERROR);
+//    		error.setTitle("회원가입 실패");
+//    		error.setContentText("주소를 입력해주세요.");
+//    		error.showAndWait();
+//    	}else if(addrChk==0) {
+//    		Alert error = new Alert(AlertType.ERROR);
+//    		error.setTitle("회원가입 실패");
+//    		error.setContentText("주소를 확인주세요.");
+//    		error.showAndWait();
+//    	}
+    	else if(birth==null) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("회원가입 실패");
+    		error.setContentText("생일을 입력해주세요.");
+    		error.showAndWait();
+    	}
+//    	else if(auth.isEmpty()) {
+//    		Alert error = new Alert(AlertType.ERROR);
+//    		error.setTitle("회원가입 실패");
+//    		error.setContentText("회원가입 목적을 입력해주세요.");
+//    		error.showAndWait();
+//    	}
+    	else {
+    		
+    		MemberVO mv = new MemberVO(id, pw, name, birth, email, phoneNum, addr1, addr2, auth);
+    		int cnt = service.signUp(mv);
+    		if (cnt>0) {
+    			Alert info = new Alert(AlertType.INFORMATION);
+    			info.setTitle("회원가입 성공");
+    			info.setContentText("회원가입에 성공하셨습니다.");
+    			info.showAndWait();
+    		}else {
+    			Alert error = new Alert(AlertType.ERROR);
+    			error.setTitle("회원가입 실패");
+        		error.setContentText("다시 시도해주세요.");
+        		error.showAndWait();
+    		}
+    	}
+    }
+
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+}

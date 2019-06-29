@@ -1,0 +1,30 @@
+package siteInfo.service;
+
+import javafx.collections.ObservableList;
+import vo.BoardVO;
+
+public interface ISiteInfoService {
+	
+	/**
+	 * 게시글을 등록하는 메서드
+	 * @author PC-08
+	 * @param bv
+	 * @return
+	 */
+	int upload(BoardVO bv);
+	
+	/**
+	 * 게시글을 조회하는 메서드
+	 * @author PC-08 
+	 * @return
+	 */
+	ObservableList<BoardVO> getNoticeBoardList();
+	
+	/**
+	 * 게시글을 수정하는 메서드
+	 * @param bv
+	 * @return
+	 */
+	int editArticle(BoardVO bv);
+
+}

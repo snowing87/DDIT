@@ -1,0 +1,43 @@
+package member.dao;
+
+import java.sql.SQLException;
+
+import javafx.collections.ObservableList;
+import vo.BoardVO;
+import vo.MemberVO;
+
+public interface IMemberDao {
+	
+	/**
+	 * 입력받은 id가 db에 존재하는지 검사하는 메서드
+	 * @author PC-08
+	 * @param id
+	 * @return
+	 * @throws SQLException 
+	 */
+	int checkDuplication(String id) throws SQLException;
+	
+	/**
+	 * 입력받은 회원정보로 회원가입을 하는 메서드
+	 * @author PC-08
+	 * @param mv
+	 * @throws SQLException 
+	 */
+	int signUp(MemberVO mv) throws SQLException;
+
+	/**
+	 * 주소를 검색하면 상세주소를 리턴하는 메서드
+	 * @param searchStr
+	 * @return
+	 */
+	String getAddress(String searchStr);
+	
+	
+	/**
+	 * 자신이 작성한 게시글만 리턴하는 메서드
+	 * @param mem_id
+	 * @return
+	 */
+	ObservableList<BoardVO> getMyBoardList(String mem_id);
+	
+}

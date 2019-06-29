@@ -1,0 +1,19 @@
+package owner.dao;
+
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public interface IRegistRoomDao {
+	// 공실 등록
+	public int insertRegistRoom(RoomVO rv);
+
+	
+	public String getAddress(String searchStr);
+	
+	//이미지사진을 받아와 등록한다
+	public void uploadImage(RoomImgVO rv);
+	
+	public int getCurrentRoomId();
+	
+}
+

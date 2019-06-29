@@ -1,0 +1,21 @@
+package member.service;
+
+import vo.MemberVO;
+
+public interface IMemberService {
+	
+	/**
+	 * 입력받은 id가 db에 존재하는지 검사하는 메서드
+	 * @author PC-08
+	 * @param id
+	 */
+	int checkDuplication(String id);
+	
+	/**
+	 * 입력받은 회원정보로 회원가입을 하는 메서드
+	 * @author PC-08
+	 * @param mv
+	 */
+	int signUp(MemberVO mv);
+
+}

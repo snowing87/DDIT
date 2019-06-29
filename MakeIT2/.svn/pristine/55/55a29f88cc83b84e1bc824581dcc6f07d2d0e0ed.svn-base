@@ -1,0 +1,77 @@
+package member.mypage;
+
+import java.io.File;
+import java.net.URL;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import vo.MemberVO;
+
+public class MemberReviewController implements Initializable {
+	MemberVO currentMember;
+	Map<String, Object> param;
+	ImageView iv;
+
+	@FXML
+	private JFXTextField tfTitle;
+	
+	@FXML
+    private FlowPane fpCenterContainer;
+
+	@FXML
+	private Label lbDate;
+
+	@FXML
+	private JFXTextArea taContent;
+
+	@FXML
+	private VBox vbCenterContainer;
+
+	@FXML
+	void onImageClick(ActionEvent event) {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+				new FileChooser.ExtensionFilter("PNG", "*.png"), new FileChooser.ExtensionFilter("GIF", "*.gif"));
+		File file = fileChooser.showOpenDialog(new Stage());
+		if (file == null) {
+			return;
+		}
+		if(iv == null) {
+			iv = new ImageView();
+			fpCenterContainer.getChildren().add(0, iv);
+		}
+		iv.setImage(new Image(file.toURI().toString()));
+	}
+
+	@FXML
+	void onCommitClick(ActionEvent event) {
+
+	}
+
+	@FXML
+	void onExitClick(ActionEvent event) {
+
+	}
+
+	public void setParam(Map<String, Object> param) {
+		this.param = param;
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+}

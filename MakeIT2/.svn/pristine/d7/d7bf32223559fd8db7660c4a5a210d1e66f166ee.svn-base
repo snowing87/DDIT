@@ -1,0 +1,16 @@
+package admin.dao;
+
+import java.util.List;
+
+import vo.MemberVO;
+
+public interface IMemberDao {
+	
+	public List<MemberVO> getAllMemberList();
+	
+	public int insertMember(MemberVO mv);
+	
+	
+	// 상세주소찾기
+	String getAddress(String searchStr);
+}

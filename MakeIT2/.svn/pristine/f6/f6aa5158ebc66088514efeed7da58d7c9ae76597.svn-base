@@ -1,0 +1,70 @@
+package admin.mainview;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import vo.MemberVO;
+import javafx.scene.layout.BorderPane;
+
+public class MainViewController implements Initializable{
+	private static MemberVO currentMember = null;
+	
+	public static void setCurrentMember(MemberVO _currentMember) {
+		currentMember = _currentMember;
+	}
+	public static MemberVO getCurrentMember() {
+		return currentMember;
+	}
+	
+	
+	
+	// maincontainer get, set
+	public BorderPane getMainContainer() {
+		return MainContainer;
+	}
+	public void setMainContainer(BorderPane mainContainer) {
+		MainContainer = mainContainer;
+	}
+
+
+
+
+	@FXML private Label btn_member;
+	@FXML private BorderPane MainContainer;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		// 회원관리 이동
+		
+		btn_member.setOnMouseClicked(e->{
+			Parent root;
+			try {
+				root = FXMLLoader.load(getClass().getClassLoader().getResource("admin/member/member.fxml"));
+				root.getStylesheets().add(getClass().getClassLoader().getResource("admin/css/stylesheet.css").toString());
+				Scene scene = new Scene(root);
+				Stage window =(Stage)btn_member.getScene().getWindow();
+				window.setScene(scene);
+				window.show();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		
+	}
+	 
+	
+	
+}

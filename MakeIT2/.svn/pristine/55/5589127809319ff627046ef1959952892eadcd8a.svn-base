@@ -1,0 +1,15 @@
+package searchRoom.service;
+
+import java.util.Map;
+
+import javafx.collections.ObservableList;
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public interface ISearchRoomService {
+	ObservableList<RoomVO> getRoomList();
+	
+	RoomImgVO getRoomImg(int room_id);
+	
+	Map<String, String> getLatLng(String searchStr);
+}

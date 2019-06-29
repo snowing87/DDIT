@@ -1,0 +1,13 @@
+package roomInfo.service;
+
+import roomInfo.dao.IRoomInfoDao;
+import roomInfo.dao.RoomInfoDaoImpl;
+
+public class RoomInfoServiceImpl implements IRoomInfoService{
+	private static IRoomInfoDao dao = RoomInfoDaoImpl.getInstance();
+	private static IRoomInfoService service = new RoomInfoServiceImpl();
+	public static IRoomInfoService getInstance() {
+		return service;
+	}
+
+}

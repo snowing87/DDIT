@@ -1,0 +1,13 @@
+package roomInfo.service;
+
+import java.util.Map;
+
+import vo.LikeVO;
+
+public interface IRoomInfoService {
+	public int memLikeRoom(Map<String, Object> param);
+	public void insertLike(LikeVO lv);
+	public void deleteLike(int likeId);
+	public int getLikeCount(int roomId);
+	public int getRoomView(int roomId);
+}

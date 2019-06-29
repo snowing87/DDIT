@@ -1,0 +1,5 @@
+package roomInfo.service;
+
+public interface IRoomInfoService {
+
+}

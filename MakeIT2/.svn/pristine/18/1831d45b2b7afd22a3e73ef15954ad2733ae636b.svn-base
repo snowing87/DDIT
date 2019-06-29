@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+    <sqlMap namespace="room">
+    
+	<insert id="insertroom" parameterClass="RoomVO">
+	insert into ROOM(ROOM_TRANSACTION)
+        values(#room_transaction#)
+    </insert>
+    
+<!--     <insert id="insertroom" parameterClass="RoomVO">	
+    insert into room values (#room_id#,
+    				   #room_name#,
+    				   #room_type#,
+    				   #room_addr1#,
+    				   #room_addr2#,
+    				   #room_transaction#,
+    				   #room_comment#,
+    				   #room_size#,
+    				   #room_floor#,
+    				   #room_my_floor#,
+    				   #room_heating_system#,
+    				   #room_available#,
+    				   #room_price#,
+    				   #room_deposit#,
+    				   #opt_airconditioner#,
+    				   #opt_washer#,
+    				   #opt_bed#,
+    				   #opt_desk#,
+    				   #opt_closet#,
+    				   #opt_tv#,
+    				   #OPT_REFREGRATOR#,  
+					   #OPT_STOVE#,                         
+					   #OPT_PET_AVAILABILLITY#,              
+					   #OPT_PARKING_LOT#,                   
+					   #OPT_VERANDA#,                       
+					   #OPT_LEASE_FUND#,                     
+  					   #MEM_ID# 
+    					)
+    </insert> -->
+    
+    </sqlMap>
+    
+    

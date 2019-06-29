@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox fx:id="myContractReiciveContainer" alignment="TOP_CENTER" minHeight="800.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="내방내방에서 계약을 완료하세요" textFill="#0080ff">
+         <font>
+            <Font name="휴먼고딕" size="28.0" />
+         </font>
+         <HBox.margin>
+            <Insets top="50.0" />
+         </HBox.margin>
+         <VBox.margin>
+            <Insets top="50.0" />
+         </VBox.margin>
+      </Label>
+      <Separator prefWidth="200.0" style="-fx-background-color: #0088FF;">
+         <VBox.margin>
+            <Insets bottom="50.0" left="30.0" right="30.0" top="30.0" />
+         </VBox.margin>
+      </Separator>
+   </children>
+</VBox>

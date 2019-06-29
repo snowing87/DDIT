@@ -1,0 +1,19 @@
+package owner.service;
+
+import java.util.Map;
+
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public interface IRegistRoomService {
+	
+	public int insertRegistRoom(RoomVO rv);
+
+	
+	public String getAddress(String searchStr);
+	
+	public int getCurrentRoomId();
+	
+	public void uploadImage(RoomImgVO rv);
+	public Map<String, String> getLatLng(String searchStr);
+}

@@ -1,0 +1,255 @@
+package owner.registRoom;
+
+import java.awt.TextField;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleNode;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.scene.web.WebView;
+import owner.service.IRegistRoomService;
+import owner.service.RegistRoomServiceImpl;
+import vo.RoomVO;
+
+public class RegistRoomController implements Initializable{
+	
+	/*종류선택*/
+	@FXML private ToggleGroup toggleRoomType;
+	@FXML private JFXToggleNode chk_one_room;
+	@FXML private JFXToggleNode chk_two_room;
+	@FXML private JFXToggleNode chk_three_room;
+	@FXML private JFXToggleNode chk_office_room;
+	@FXML private JFXToggleNode chk_apart;
+	
+/*	건물유형
+	@FXML private ToggleGroup toggleBuildType;
+	@FXML private JFXToggleNode chk_house;
+	@FXML private JFXToggleNode chk_many_house;
+	@FXML private JFXToggleNode chk_villa;
+	@FXML private JFXToggleNode chk_sangga;*/
+	
+	/*주소*/
+	@FXML private WebView wb_location;
+	@FXML private JFXTextField tf_addr1;
+	@FXML private JFXButton btn_addr;
+	@FXML private Label lb_doromyoung;
+	@FXML private JFXTextField tf_addrdong;
+	@FXML private JFXTextField tf_addrho;
+	
+	/*거래정보*/
+	@FXML private JFXButton chk_monthly_rent;
+	@FXML private JFXButton chk_jeonsae_rent;
+	@FXML private ToggleGroup ToggleTransction;
+	
+	/*기본정보*/
+	@FXML private ToggleGroup toggleDate;
+    @FXML private JFXToggleNode chk_immediately;
+    @FXML private JFXTextField tf_supplyArea;
+    @FXML private JFXTextField tf_supplyAream;
+    @FXML private JFXComboBox<String> cb_floor;
+    @FXML private JFXComboBox<String> cb_my_floor;
+    @FXML private JFXComboBox<String> cb_heating;
+    @FXML private JFXToggleNode chk_date_consult;
+    
+    /*추가정보*/
+    @FXML private JFXTextField maintenance;
+    @FXML private JFXToggleNode btn_no_maintenance;
+    @FXML private JFXToggleNode btn_yes_maintenance;
+	@FXML private JFXTextField btn_price_maintenance;
+	@FXML private JFXToggleNode btn_no_car;
+	@FXML private JFXToggleNode btn_yes_car;
+	@FXML private JFXToggleNode btn_no_pet;
+	@FXML private JFXToggleNode btn_yes_pet;
+	@FXML private JFXToggleNode btn_no_veranda;
+	@FXML private JFXToggleNode btn_yes_veranda;
+	@FXML private JFXToggleNode btn_aircon;
+	@FXML private JFXToggleNode btn_washer;
+	@FXML private JFXToggleNode btn_bed;
+	@FXML private JFXToggleNode btn_desk;
+	@FXML private JFXToggleNode btn_closet;
+	@FXML private JFXToggleNode btn_tv;
+	@FXML private JFXToggleNode btn_refrigerator;
+	@FXML private JFXToggleNode btn_stove;
+	@FXML private JFXToggleNode btn_no_leasefund;
+	@FXML private JFXToggleNode btn_yes_leasefund;
+	@FXML private ToggleGroup toggleMaintenance;
+	@FXML private ToggleGroup toggleParking;
+	@FXML private ToggleGroup togglePet;
+	@FXML private ToggleGroup toggleBalcony;
+	@FXML private ToggleGroup toggleLoan;
+	
+	
+	/*상세설명*/
+	@FXML private JFXTextField ft_title;
+	@FXML private JFXTextArea tf_comment;
+	
+	/*사진정보*/
+	@FXML private ImageView image_room1;
+	@FXML private ImageView image_room2;
+	@FXML private ImageView image_room3;
+	@FXML private JFXButton image_button;
+	
+	/*등록 취소*/
+	@FXML private JFXButton btn_cancel;
+	@FXML private JFXButton btn_register;
+	
+	@FXML private TextField test;
+	
+	//서비스 콜
+	IRegistRoomService service = RegistRoomServiceImpl.getInstance();
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		//roomType();
+		transaction();
+	}
+	
+	
+	public void errMsg(String headerText, String msg) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("오류");
+		alert.setHeaderText(headerText);
+		alert.setContentText(msg);
+		alert.showAndWait();
+	}
+
+	public void infoMsg(String headerText, String msg) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("정보");
+		alert.setHeaderText(headerText);
+		alert.setContentText(msg);
+		alert.showAndWait();
+	}
+	
+	/**
+	 * 매물종류를 선택하는 메서드
+	 */
+	public void roomType() {
+		btn_register.setOnAction(e->{
+		
+			RoomVO rv = new RoomVO();
+			if(toggleRoomType.getSelectedToggle().isSelected()) {
+				
+				JFXToggleNode jt = (JFXToggleNode)toggleRoomType.getSelectedToggle();
+				//rv.setRoom_type(jt.getText());
+				
+			}
+			
+			service.insertRegistRoom(rv);
+
+		});
+	}
+	
+	/**
+	 * 위치정보를 선택하는 메서드
+	 */
+	public void location() {
+		btn_addr.setOnAction(e-> {
+			
+		
+			
+		});
+	}
+	
+	/**
+	 * 거래정보 메서드
+	 */
+	public void transaction() {
+		btn_register.setOnAction(e->{
+			
+			RoomVO rv = new RoomVO();
+			if(ToggleTransction.getSelectedToggle().isSelected()) {
+				
+				JFXToggleNode jt = (JFXToggleNode)ToggleTransction.getSelectedToggle();
+				rv.setRoom_transaction(jt.getText());
+				System.out.println(jt);
+			}
+			
+			int cnt = service.insertRegistRoom(rv);
+			
+		});
+	}
+	
+	/**
+	 * 기본정보 메서드
+	 */
+	public void common() {
+		btn_register.setOnAction(e-> {
+			
+			//층수 넣기위한 for문
+			for(int i=1; i<=50; i++) {
+			cb_floor.getItems().addAll(i+"층");
+			}
+			
+			cb_heating.getItems().addAll("지역난방","중앙난방","개별난방");
+			
+			RoomVO rv = new RoomVO();
+			rv.setRoom_size(Integer.parseInt(tf_supplyArea.getText()));
+			rv.setRoom_floor(Integer.parseInt(cb_floor.getValue()));
+			rv.setRoom_my_floor(Integer.parseInt(cb_my_floor.getValue()));
+			rv.setRoom_heating_system(cb_heating.getValue());
+			
+			// boolean값 처리를 위한 코드
+			if(toggleDate.getSelectedToggle().isSelected()) {
+				JFXToggleNode jt = (JFXToggleNode)toggleDate.getSelectedToggle();
+				if(jt.getText().equals("즉시입주")) {
+					// 1이면 true이므로 즉시입주
+					rv.setRoom_available(1);
+				}else {
+					// 0이면 false이므로 날짜협의
+					rv.setRoom_available(0);
+				}
+			}
+		});
+	}
+	
+	public void addInformation() {
+		btn_register.setOnAction(e->{
+			
+			RoomVO rv = new RoomVO();
+			rv.setRoom_price(Integer.parseInt(maintenance.getText()));
+			//주차여부
+			if(toggleParking.getSelectedToggle().isSelected()) {
+				JFXToggleNode jt = (JFXToggleNode)toggleParking.getSelectedToggle();
+				if(jt.getText().equals("불가능")) {
+					rv.setOpt_parking_lot(1);
+				} else {
+					rv.setOpt_parking_lot(0);
+				}
+			}
+		
+			
+			
+			
+		});
+		
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

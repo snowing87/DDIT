@@ -1,0 +1,245 @@
+package roomInfo.view;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.web.WebView;
+import main.view.BuildedSqlMapConfig;
+import searchRoom.service.SearchRoomServiceImpl;
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public class RoomInfoController implements Initializable {
+	RoomVO currentRoom;
+	
+	final String ROOM_SIZE_METER = "m²";
+	final String ROOM_SIZE_PYONG = "평";
+	
+	String sizeText = ROOM_SIZE_METER;
+	
+	SqlMapClient smc = BuildedSqlMapConfig.getInstance();
+
+	List<RoomImgVO> images = null;
+	
+	int currentImageIndex = 0;
+	
+	@FXML
+	private Label lbSize;
+
+	@FXML
+	private Label lbVeranda;
+
+	@FXML
+	private Label lbRoomSize;
+
+	@FXML
+	private Label lbParking;
+
+	@FXML
+	private JFXButton onRealtorInfoClick;
+
+	@FXML
+	private Label lbDeposit;
+
+	@FXML
+	private Label lbLeaseFund;
+
+	@FXML
+	private Label lbHeating;
+
+	@FXML
+	private WebView wbRoomLocation;
+
+	@FXML
+	private Label lbRoomPrice;
+
+	@FXML
+	private ImageView ivRoomImage;
+
+	@FXML
+	private JFXTextArea taRoomContent;
+
+	@FXML
+	private Label lbPet;
+
+	@FXML
+	private Label lbRoomSizeType;
+
+	@FXML
+	private Label lbRoomFloor;
+
+	@FXML
+	private TextField tfRoomTitle;
+
+	@FXML
+	private Label lbRoomTransaction;
+
+	@FXML
+	private Label lbAvailable;
+
+	@FXML
+	private Label lbMonthPrice;
+	
+	@FXML
+	private Label lbFullPrice;
+	
+	@FXML
+	void onChangeSizeClick(ActionEvent event) {
+
+	}
+
+	@FXML
+	void onHeartClick(ActionEvent event) {
+
+	}
+
+
+	@FXML
+	void onReportClick(ActionEvent event) {
+
+	}
+
+	/**
+	 * 방 이미지에서 왼쪽을 눌렀을 때
+	 * @param event
+	 */
+	@FXML
+	void onRoomImageLeftClick(ActionEvent event) {
+		int arrSize = images.size();
+		currentImageIndex = (currentImageIndex + arrSize -1)%arrSize;
+		ivRoomImage.setImage(new Image(images.get(currentImageIndex).getImg_uri()));
+	}
+
+	/**
+	 * 방 이미지에서 오른쪽을 눌렀을 때
+	 * @param event
+	 */
+	@FXML
+	void onRoomImageRightClick(ActionEvent event) {
+		int arrSize = images.size();
+		currentImageIndex = (currentImageIndex + 1)%arrSize;
+		ivRoomImage.setImage(new Image(images.get(currentImageIndex).getImg_uri()));
+	}
+	
+	public void setRoomVO(RoomVO currentRoomVO) {
+		this.currentRoom = currentRoomVO;
+		lbSize.setText(currentRoom.getRoom_size() + " " + sizeText);
+		lbVeranda.setText((currentRoom.getOpt_veranda() == 1) ? "있음" : "없음");
+		lbRoomSize.setText(currentRoom.getRoom_size() + " " + sizeText);
+		lbParking.setText((currentRoom.getOpt_parking_lot()==1) ? "있음" : "없음");
+		lbDeposit.setText(currentRoom.getRoom_deposit() + "만원");
+		lbLeaseFund.setText((currentRoom.getOpt_lease_fund()==1)?"가능":"불가능");
+		lbHeating.setText(currentRoom.getRoom_heating_system());
+		lbRoomPrice.setText(currentRoom.getRoom_price() + "만원");
+		taRoomContent.setText(currentRoom.getRoom_comment());
+		lbPet.setText((currentRoom.getOpt_pet_availabillity())==1?"가능":"불가능");
+		lbRoomSizeType.setText(sizeText);
+		lbRoomFloor.setText(currentRoom.getRoom_my_floor() + " / " + currentRoom.getRoom_floor());
+		tfRoomTitle.setText(currentRoom.getRoom_name());
+		lbRoomTransaction.setText(currentRoom.getRoom_transaction());
+		lbAvailable.setText((currentRoom.getRoom_available())==1?"가능":"불가능");
+		
+		if(currentRoomVO.getRoom_transaction().equals("월세")) {
+			lbMonthPrice.setText("월 " + currentRoomVO.getRoom_price() + "만원");
+		}else if(currentRoomVO.getRoom_transaction().equals("전세")) {
+			lbMonthPrice.setText("전세 " + currentRoomVO.getRoom_price() + "만원");
+		}
+		
+		Map<String, String> resultMap = SearchRoomServiceImpl.getInstance().getLatLng(currentRoomVO.getRoom_addr1());
+		if(resultMap==null) {
+			wbRoomLocation.getEngine().load("http://yyy9942.cafe24.com/ddit/DaumMap.html");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("검색 결과");
+			alert.setContentText("잘못된 주소를 입력하셨습니다");
+			alert.show();
+		}else {
+			String lat = resultMap.get("lat");
+			String lng = resultMap.get("lng");
+			
+			wbRoomLocation.getEngine().load("http://yyy9942.cafe24.com/ddit/searchMap.html?lat="+lat+"&lng="+lng);
+		}
+		
+		try {
+			images = smc.queryForList("roomInfo.getRoomImages",currentRoom.getRoom_id());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		ivRoomImage.setImage(new Image(images.get(0).getImg_uri()));
+		
+		
+		// 여기서부터는 옵션을 줍니다
+		
+		// 에어컨
+		if(currentRoom.getOpt_airconditioner()==1) {
+			
+		}
+		// 침대
+		if(currentRoom.getOpt_bed()==1) {
+			
+		}
+		// 옷장
+		if(currentRoom.getOpt_closet()==1) {
+			
+		}
+		// 책상
+		if(currentRoom.getOpt_desk()==1) {
+			
+		}
+		// 주차여부
+		if(currentRoom.getOpt_parking_lot()==1) {
+			
+		}
+		// 냉장고
+		if(currentRoom.getOpt_refregerator()==1) {
+			
+		}
+		// 가스레인지
+		if(currentRoom.getOpt_stove()==1) {
+			
+		}
+		
+		// TV
+		if(currentRoom.getOpt_tv()==1) {
+			
+			
+		}
+		// 베란다
+		if(currentRoom.getOpt_veranda()==1) {
+			
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+}

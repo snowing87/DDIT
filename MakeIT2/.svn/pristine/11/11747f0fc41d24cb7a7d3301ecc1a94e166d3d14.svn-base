@@ -1,0 +1,53 @@
+package siteInfo.noticeBoard;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import vo.BoardVO;
+
+public class BoardCellController implements Initializable {
+	@FXML
+	private Label lbCategory;
+
+	@FXML
+	private Label lbName;
+
+	@FXML
+	private Label lbDate;
+
+	@FXML
+	private Label lbNo;
+
+	@FXML
+	private Label lbTitle;
+	
+	@FXML
+    private AnchorPane boardCell;
+	
+	private BoardVO bv;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		boardCell.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				System.out.println("나는 " + bv.getBoard_title() + " 이라는 제목을 가지고있어!~");
+			}
+		});
+	}
+	
+	public void setItem(BoardVO bv, int no) {
+		this.bv = bv;
+		lbNo.setText(no+"");
+		lbTitle.setText(bv.getBoard_title());
+		lbDate.setText(bv.getBoard_date().toString());
+		lbName.setText(bv.getMem_id());
+		lbCategory.setText(bv.getBoard_category());
+	}
+}

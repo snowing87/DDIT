@@ -1,0 +1,45 @@
+package member.favoriteRoom.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import admin.dao.AdminMemberDaoImpl;
+import admin.dao.IAdminMemberDao;
+import main.view.BuildedSqlMapConfig;
+import vo.MemberVO;
+import vo.SearchLogVO;
+
+public class ISearchLogDaoImpl implements ISearchLogDao {
+	private static ISearchLogDaoImpl dao;
+	private SqlMapClient client;
+
+	private ISearchLogDaoImpl() {
+		client = BuildedSqlMapConfig.getInstance();
+	}
+
+	public static ISearchLogDao getInstance() {
+		if (dao == null) {
+			dao = new ISearchLogDaoImpl();
+		}
+		return dao;
+	}
+	
+	/**
+	 * 최근본 방 로그 전체조회
+	 */
+	@Override
+	public List<SearchLogVO> getSearchRoomLog() {
+			List<SearchLogVO> logList = null;
+
+			try {
+				logList = client.queryForList("searchLog.getAllSearchLog");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return logList;
+		}
+	}
+

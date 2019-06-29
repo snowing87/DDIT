@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+    <sqlMap namespace="board">
+    
+    	<insert id="postArticle" parameterClass="vo.BoardVO">
+    		
+	    	insert into BOARD
+			(mem_id, mem_pw, mem_name, mem_birth, mem_mail, mem_phone, mem_addr1, mem_addr2, mem_auth)
+			values (#mem_id#, #mem_pw#, #mem_name#, #mem_birth#, #mem_mail#, #mem_phone#, #mem_addr1#, #mem_addr2#, #mem_auth#)
+    		
+    	</insert>
+    	
+    
+    </sqlMap>
+    

@@ -1,0 +1,45 @@
+package admin.member;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import vo.MemberVO;
+
+public class MemberCellController implements Initializable {
+	
+	@FXML
+	private HBox memberCell;
+	
+	@FXML
+	private Label mem_no;
+	
+	@FXML
+	private Label mem_id;
+	
+	@FXML
+	private Label mem_name;
+	
+	private MemberVO mv;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		memberCell.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				System.out.println(mv.getMem_name());
+			}
+		});
+	}
+	
+	public void setItem(MemberVO mv, int no) { 
+		mem_id.setText(mv.getMem_id());
+		mem_name.setText(mv.getMem_name());
+		this.mv = mv;
+	}
+}

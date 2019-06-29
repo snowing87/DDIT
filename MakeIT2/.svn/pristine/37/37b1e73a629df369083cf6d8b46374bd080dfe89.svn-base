@@ -1,0 +1,72 @@
+package siteInfo.siteInfo;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+
+public class SiteInfoController implements Initializable{
+	
+	@FXML
+	private BorderPane bpSiteInfoContainer;
+
+	@FXML
+    private JFXButton btnFrequentQuestions;
+
+    @FXML
+    private JFXButton btn1to1Chat;
+
+    @FXML
+    private JFXButton btnNoticeBoard;
+    
+    @FXML
+    private VBox vbSiteInfo;
+
+    @FXML
+    void onFrequentQuestions(ActionEvent event) {
+    	
+    	Parent frequentQuestionNodes;
+		try {
+			frequentQuestionNodes = FXMLLoader.load(getClass().getClassLoader().getResource("siteInfo/frequentQuestion/FrequentQuestion.fxml"));
+			bpSiteInfoContainer.setCenter(frequentQuestionNodes);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void on1to1Chat(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onNoticeBoard(ActionEvent event) {
+    	Parent frequentQuestionNodes;
+		try {
+			frequentQuestionNodes = FXMLLoader.load(getClass().getClassLoader().getResource("siteInfo/noticeBoard/NoticeBoard.fxml"));
+			bpSiteInfoContainer.setCenter(frequentQuestionNodes);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		Parent frequentQuestionNodes;
+		try {
+			frequentQuestionNodes = FXMLLoader.load(getClass().getClassLoader().getResource("siteInfo/frequentQuestion/FrequentQuestion.fxml"));
+			bpSiteInfoContainer.setCenter(frequentQuestionNodes);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

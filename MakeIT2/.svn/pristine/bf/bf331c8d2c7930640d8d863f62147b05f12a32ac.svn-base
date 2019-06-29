@@ -1,0 +1,11 @@
+package member.favoriteRoom.service;
+
+import java.util.List;
+
+import vo.MemberVO;
+import vo.SearchLogVO;
+
+public interface ISearchLogService {
+	
+	public List<SearchLogVO> getSearchRoomLog();
+}

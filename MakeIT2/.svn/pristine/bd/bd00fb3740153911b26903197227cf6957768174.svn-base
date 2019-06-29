@@ -1,0 +1,44 @@
+package siteInfo.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import main.view.BuildedSqlMapConfig;
+import vo.BoardVO;
+
+public class ISiteInfoDaoImpl implements ISiteInfoDao{
+	
+	private static ISiteInfoDaoImpl dao;
+	private SqlMapClient client;
+	
+	private ISiteInfoDaoImpl() {
+		client = BuildedSqlMapConfig.getInstance();
+	}
+	
+	public static ISiteInfoDao getInstance() {
+		if(dao==null) {
+			dao=new ISiteInfoDaoImpl();
+		}
+		return dao;
+	}
+	
+	@Override
+	public int upload(BoardVO bv) throws SQLException {
+		Object obj = client.insert("siteInfo.upload",bv);
+		if(obj==null) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+
+	@Override
+	public ObservableList<BoardVO> getNoticeBoardList() throws SQLException {
+		List<BoardVO> list = client.queryForList("siteInfo.showNoticeBoard");
+		return FXCollections.observableArrayList(list);
+	}
+}

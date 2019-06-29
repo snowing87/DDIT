@@ -1,0 +1,37 @@
+package roomInfo.service;
+
+import java.util.Map;
+
+import roomInfo.dao.IRoomInfoDao;
+import roomInfo.dao.RoomInfoDaoImpl;
+import vo.LikeVO;
+
+public class RoomInfoServiceImpl implements IRoomInfoService{
+	private static IRoomInfoDao dao = RoomInfoDaoImpl.getInstance();
+	private static IRoomInfoService service = new RoomInfoServiceImpl();
+	public static IRoomInfoService getInstance() {
+		return service;
+	}
+
+	@Override
+	public int memLikeRoom(Map<String, Object> param) {
+		return dao.memLikeRoom(param);
+	}
+	
+	@Override
+	public void insertLike(LikeVO lv) {
+		dao.insertLike(lv);
+	}
+	@Override
+	public void deleteLike(int likeId) {
+		dao.deleteLike(likeId);
+	}
+	@Override
+	public int getLikeCount(int roomId) {
+		return dao.getLikeCount(roomId);
+	}
+	@Override
+	public int getRoomView(int roomId) {
+		return dao.getRoomView(roomId);
+	}
+}

@@ -1,0 +1,86 @@
+package siteInfo.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import main.view.BuildedSqlMapConfig;
+import vo.BoardVO;
+import vo.CommentVO;
+
+public class ISiteInfoDaoImpl implements ISiteInfoDao{
+	
+	private static ISiteInfoDaoImpl dao;
+	private SqlMapClient client;
+	
+	private ISiteInfoDaoImpl() {
+		client = BuildedSqlMapConfig.getInstance();
+	}
+	
+	public static ISiteInfoDao getInstance() {
+		if(dao==null) {
+			dao=new ISiteInfoDaoImpl();
+		}
+		return dao;
+	}
+	
+	@Override
+	public int upload(BoardVO bv) throws SQLException {
+		Object obj = client.insert("siteInfo.upload",bv);
+		if(obj==null) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+
+	@Override
+	public ObservableList<BoardVO> getNoticeBoardList() throws SQLException {
+		List<BoardVO> list = client.queryForList("siteInfo.showNoticeBoard");
+		return FXCollections.observableArrayList(list);
+	}
+
+	@Override
+	public ObservableList<BoardVO> getFrequentQustionBoardList() throws SQLException {
+		List<BoardVO> list = client.queryForList("siteInfo.showFQBoard");
+		return FXCollections.observableArrayList(list);
+	}
+	
+	@Override
+	public int editArticle(BoardVO bv) throws SQLException {
+		int cnt= (int)client.update("siteInfo.editArticle", bv);
+		return cnt;
+	}
+
+	@Override
+	public int deleteArticle(BoardVO bv) throws SQLException {
+		int cnt = (int)client.delete("siteInfo.deleteArticle", bv);
+		return cnt;
+	}
+
+	@Override
+	public int checkCommentExist(String mem_id) throws SQLException {
+		int chk = (int) client.queryForObject("siteInfo.checkCommentExist", mem_id);
+		return chk;
+	}
+
+	@Override
+	public int addComment(CommentVO cv) throws SQLException {
+		Object obj = client.insert("siteInfo.addComment", cv);
+		if(obj==null) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+
+	@Override
+	public ObservableList<CommentVO> getCommentList() throws SQLException {
+		List<CommentVO> list = client.queryForList("siteInfo.getCommentList");
+		return FXCollections.observableArrayList(list);
+	}
+
+}

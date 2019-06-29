@@ -1,0 +1,8 @@
+package owner.dao;
+
+import vo.RoomVO;
+
+public interface IRegistRoomDao {
+	
+	public int insertRegistRoom(RoomVO rv);
+}

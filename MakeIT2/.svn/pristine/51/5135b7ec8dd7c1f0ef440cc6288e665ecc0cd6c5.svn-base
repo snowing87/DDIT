@@ -1,0 +1,92 @@
+package siteInfo.articlePage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import siteInfo.siteInfo.SiteInfoController;
+import vo.BoardVO;
+
+public class BoardCellController implements Initializable {
+	
+	private BoardVO currentBoardVO;
+	ObservableList<BoardVO> list;
+	SiteInfoController siteInfoController;
+	
+	@FXML
+    private HBox boardCell;
+	
+	@FXML
+	private Label lbNo;
+	
+	@FXML
+	private Label lbTitle;
+
+    @FXML
+    private Label lbName;
+
+    @FXML
+    private Label lbDate;
+    
+    @FXML
+    private JFXButton btnEdit;
+
+    @FXML
+    private JFXButton btnDel;
+	
+	
+	@FXML
+    void onBtnEdit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onBtnDel(ActionEvent event) {
+
+    }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		boardCell.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				
+				try {
+					FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("siteInfo/articlePage/ArticlePage.fxml"));
+					Parent articlePageNodes = loader.load();
+					ArticlePageController apc = loader.getController();
+					apc.setCurrentBoardVO(currentBoardVO);
+					apc.setItem(currentBoardVO);
+					apc.setBoardDataList(list);
+					SiteInfoController sic = siteInfoController.getInstance(); 
+					BorderPane bp = sic.getBpSiteInfoContainer();
+					bp.setCenter(articlePageNodes);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public void setItem(BoardVO bv, int no) {
+		this.currentBoardVO = bv;
+		lbNo.setText(no+"");
+		lbTitle.setText(bv.getBoard_title());
+		lbDate.setText(bv.getBoard_date().toString());
+		lbName.setText(bv.getMem_id());
+	}
+}

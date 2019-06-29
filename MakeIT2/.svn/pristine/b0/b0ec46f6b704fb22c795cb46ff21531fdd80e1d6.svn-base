@@ -1,0 +1,171 @@
+package siteInfo.articlePage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import main.view.MainViewController;
+import siteInfo.service.ISiteInfoService;
+import siteInfo.service.ISiteInfoServiceImpl;
+import siteInfo.siteInfo.SiteInfoController;
+import siteInfo.siteInfoInput.SiteInfoInputPageController;
+import siteInfo.siteInfoUpdate.SiteInfoUpdatePageController;
+import vo.BoardVO;
+import vo.MemberVO;
+
+public class ArticlePageController implements Initializable{
+	
+	private BoardVO currentBoardVO;
+	MemberVO currentMember = MainViewController.getCurrentMember();
+	ISiteInfoService service = ISiteInfoServiceImpl.getInstance();
+	SiteInfoController siteInfoController;
+	
+	@FXML
+    private VBox vbArticle;
+	
+	@FXML
+	private Label lbArticleTitle;
+	
+	@FXML
+	private JFXButton btnWriter;
+	
+	@FXML
+	private Label lbUploadDate;
+	
+	@FXML
+	private JFXButton btnEdit;
+	
+	@FXML
+    private JFXButton btnDelete;
+	
+	@FXML
+	private ImageView imageView;
+
+    @FXML
+    private JFXTextArea taContent;
+
+    @FXML
+    private VBox vbArticleList;
+    
+    
+    @FXML
+    void onBtnLeftAction(ActionEvent event) {
+    	if(current_page != 0) {
+			current_page--;
+			vbArticleList.getChildren().clear();
+			setDataList(list);
+		}
+    }
+
+    @FXML
+    void onBtnRightAction(ActionEvent event) {
+    	if(current_page < max_page) {
+			if(list.size() - (max_page * SHOW_MAX_IDX) == 0 && current_page == max_page-1)
+				return;
+			
+			current_page++;
+			vbArticleList.getChildren().clear();
+			setDataList(list);
+		}
+    }
+    
+    @FXML
+    void onEditBtn(ActionEvent event) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("siteInfo/siteInfoUpdate/SiteInfoUpdatePage.fxml"));
+			Parent SiteInfoUpdatePageNodes = loader.load();
+			SiteInfoUpdatePageController apc = loader.getController();
+			apc.setItem(currentBoardVO);
+			SiteInfoController sic = siteInfoController.getInstance();
+			BorderPane bp = sic.getBpSiteInfoContainer();
+			bp.setCenter(SiteInfoUpdatePageNodes);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+
+    @FXML
+    void onDeleteBtn(ActionEvent event) {
+    	
+    }
+    
+    public void setCurrentBoardVO(BoardVO bv) {
+    	currentBoardVO = bv;
+    }
+    
+    /**
+     * 게시판
+     */
+	final int SHOW_MAX_IDX = 5;
+    int current_page = 0;
+	int max_page;
+	int max_idx;
+	ObservableList<BoardVO> list;
+
+	public void setDataList(ObservableList<BoardVO> list) {
+		max_page = this.list.size() / SHOW_MAX_IDX;
+		max_idx = SHOW_MAX_IDX;
+
+		if (current_page == max_page) {
+			max_idx = this.list.size() - (max_page * SHOW_MAX_IDX);
+		}
+
+		try {
+			FXMLLoader loader;
+			BoardCellController controller;
+			Parent parent;
+			int startIdx = SHOW_MAX_IDX * current_page;
+			vbArticleList.getChildren().clear();
+			for (int i = startIdx; i < startIdx + max_idx; i++) {
+				BoardVO bv = this.list.get(i);
+				loader = new FXMLLoader(getClass().getResource("/siteInfo/articlePage/BoardCell.fxml"));
+				parent = loader.load();
+				controller = loader.getController();
+				controller.setItem(bv, i);
+				vbArticleList.getChildren().add(parent);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setItem(BoardVO bv) {
+		currentBoardVO = bv;
+		lbArticleTitle.setText(bv.getBoard_title());
+		btnWriter.setText(bv.getMem_id());
+		lbUploadDate.setText(bv.getBoard_date().toString());
+		if(bv.getBoard_img()!=null) {
+			imageView.setFitWidth(500);
+			imageView.setFitHeight(400);
+			imageView.setImage(new Image(bv.getBoard_img()));
+		}
+		taContent.setText(bv.getBoard_content());
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		list = service.getNoticeBoardList();
+		setDataList(list);
+		if(currentMember.getMem_auth().trim().equals("admin")) {
+			btnEdit.setVisible(true);
+			btnEdit.setDisable(false);
+			btnDelete.setVisible(true);
+			btnDelete.setDisable(false);
+		}
+	}
+}

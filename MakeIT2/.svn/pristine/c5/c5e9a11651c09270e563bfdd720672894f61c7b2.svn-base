@@ -1,0 +1,55 @@
+package member.mypage;
+
+import java.net.URL;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXCheckBox;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+public class ReceiveContractCellController implements Initializable {
+	@FXML
+	private Label lbRealtorName;
+
+	@FXML
+	private JFXCheckBox cbContract;
+
+	@FXML
+	private Label lbRoomName;
+
+	@FXML
+	
+	private Label lbRoomType;
+
+	@FXML
+	private Label lbRoomPrice;
+	
+	@FXML
+	private ImageView ivRoom;
+	
+	public void setCell(Map param) {
+		lbRealtorName.setText(param.get("realtorName").toString());
+		lbRoomName.setText(param.get("roomName").toString());
+		lbRoomType.setText(param.get("roomType").toString());
+		lbRoomPrice.setText(param.get("roomPrice").toString());
+		ivRoom.setImage(new Image(param.get("img_uri").toString()));
+	}
+	
+	public boolean isSelected() {
+		return cbContract.isSelected();
+	}
+	
+	public void setCbInvisible() {
+		cbContract.setVisible(false);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+}

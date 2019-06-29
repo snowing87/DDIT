@@ -1,0 +1,11 @@
+package member.favoriteRoom.dao;
+
+import java.util.List;
+
+import vo.SearchLogVO;
+
+public interface ISearchLogDao {
+	
+	List<SearchLogVO> getSearchRoomLog();
+	
+}

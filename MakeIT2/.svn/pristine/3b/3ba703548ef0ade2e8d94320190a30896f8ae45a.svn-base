@@ -1,0 +1,36 @@
+package searchRoom.service;
+
+import java.util.Map;
+
+import javafx.collections.ObservableList;
+import searchRoom.dao.ISearchRoomDao;
+import searchRoom.dao.SearchRoomDaoImpl;
+import vo.RoomImgVO;
+import vo.RoomVO;
+import vo.SearchLogVO;
+
+public class SearchRoomServiceImpl implements ISearchRoomService{
+	private static ISearchRoomDao dao = SearchRoomDaoImpl.getInstance();
+	private static ISearchRoomService service = new SearchRoomServiceImpl();
+	public static ISearchRoomService getInstance() {
+		return service;
+	}
+	@Override
+	public ObservableList<RoomVO> getRoomList() {
+		return dao.getRoomList();
+	}
+	
+	@Override
+	public RoomImgVO getRoomImg(int room_id) {
+		return dao.getRoomImg(room_id);
+	}
+	
+	@Override
+	public Map<String, String> getLatLng(String searchStr){
+		return dao.getLatLng(searchStr);
+	}
+	@Override
+	public void AddSearchLog(SearchLogVO slvo) {
+		dao.AddSearchLog(slvo);
+	}
+}

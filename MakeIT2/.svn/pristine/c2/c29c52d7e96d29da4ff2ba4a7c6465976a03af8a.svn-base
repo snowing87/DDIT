@@ -1,0 +1,18 @@
+package roomInfo.dao;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import main.view.BuildedSqlMapConfig;
+
+public class RoomInfoDaoImpl implements IRoomInfoDao {
+	private static IRoomInfoDao dao = new RoomInfoDaoImpl();
+	private static SqlMapClient smc = BuildedSqlMapConfig.getInstance();
+	public static IRoomInfoDao getInstance() {
+		return dao;
+	}
+	
+	private RoomInfoDaoImpl() {
+
+	}
+
+}

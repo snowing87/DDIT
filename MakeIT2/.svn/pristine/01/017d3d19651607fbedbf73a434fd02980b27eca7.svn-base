@@ -1,0 +1,136 @@
+package board.inputPage;
+
+import java.net.URL;
+import java.util.Calendar;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+
+import board.service.IBoardService;
+import board.service.IBoardServiceImpl;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
+import main.view.MainViewController;
+import vo.BoardVO;
+import vo.MemberVO;
+
+public class InputPageController implements Initializable{
+	
+	MemberVO currentMember = MainViewController.getCurrentMember();
+	
+    @FXML
+    private ImageView imageLogo;
+    
+    @FXML
+    private JFXComboBox<String> cbBoard;
+
+    @FXML
+    private JFXComboBox<String> cbBoardHeader;
+
+    @FXML
+    private JFXTextField tfBoardTitle;
+    
+    @FXML
+    private JFXButton btnAddImage;
+    
+    @FXML
+    private JFXButton btnAddVideo;
+    
+    @FXML
+    private JFXButton btnAddMap;
+    
+    @FXML
+    private JFXButton btnAddFile;
+    
+    @FXML
+    private JFXTextArea taBoardContent;
+    
+    @FXML
+    private JFXButton btnCancel;
+
+    @FXML
+    private JFXButton btnOk;
+
+    @FXML
+    void addImage(ActionEvent event) {
+    	
+    }
+
+    @FXML
+    void addVideo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addMap(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addFile(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cancel(ActionEvent event) {
+
+    }
+
+    @FXML
+    void postArticle(ActionEvent event) {
+    	
+    	BoardVO bv = new BoardVO();
+    	
+    	bv.setBoard_category(cbBoardHeader.getSelectionModel().getSelectedItem());
+    	bv.setBoard_title(tfBoardTitle.getText().trim());
+    	bv.setBoard_content(taBoardContent.getText().trim());
+    	bv.setBoard_date(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+    	bv.setMem_id(currentMember.getMem_id());
+    	
+    	if(bv.getBoard_category().equals(null)) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("게시글 작성 실패");
+    		error.setContentText("머리말을 설정해주세요.");
+    		error.showAndWait();
+    	}else if(bv.getBoard_title().equals(null)) {
+    		Alert error = new Alert(AlertType.ERROR);
+    		error.setTitle("게시글 작성 실패");
+    		error.setContentText("게시글 제목을 작성해주세요.");
+    		error.showAndWait();
+    	}else if(bv.getBoard_content().equals(null)) {
+    		Alert confirm = new Alert(AlertType.CONFIRMATION);
+    		confirm.setTitle("경고");
+    		confirm.setContentText("게시글 내용이 없습니다. 이대로 작성하실겁니까?");
+
+    		ButtonType btnResult = confirm.showAndWait().get();
+    		
+    		if(btnResult==ButtonType.OK) {
+    			IBoardService service = IBoardServiceImpl.getInstance();
+    			
+    			int cnt = service.postArticle(bv);
+    		}
+    	}
+    }
+    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ObservableList<String> selectBoard = FXCollections.observableArrayList("","","","");
+		ObservableList<String> selectHeader = FXCollections.observableArrayList("","","","");
+		
+		cbBoard.setItems(selectBoard);
+		cbBoardHeader.setItems(selectHeader);
+	}
+	
+	
+	
+}

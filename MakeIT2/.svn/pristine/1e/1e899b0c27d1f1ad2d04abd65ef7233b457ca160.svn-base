@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:controller="roomInfo.view.WantContractController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton layoutX="58.0" layoutY="189.0" onAction="#onContractClick" text="계약 신청" />
+      <JFXButton layoutX="209.0" layoutY="189.0" onAction="#onCloseClick" text="닫기" />
+   </children>
+</AnchorPane>

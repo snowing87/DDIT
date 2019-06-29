@@ -1,0 +1,30 @@
+package board.dao;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import main.view.BuildedSqlMapConfig;
+import vo.BoardVO;
+
+public class IBoardDaoImpl implements IBoardDao{
+	
+	private static IBoardDaoImpl dao;
+	private SqlMapClient client;
+	
+	private IBoardDaoImpl() {
+		client = BuildedSqlMapConfig.getInstance();
+	}
+	
+	public static IBoardDao getInstance() {
+		if(dao==null) {
+			dao=new IBoardDaoImpl();
+		}
+		return dao;
+	}
+
+	@Override
+	public int postArticle(BoardVO bv) {
+		Object obj = 0;
+		return 0;
+	}
+	
+}

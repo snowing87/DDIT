@@ -1,0 +1,30 @@
+package member.dao;
+
+import java.sql.SQLException;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import main.view.BuildedSqlMapConfig;
+
+public class IMemberDaoImpl implements IMemberDao{
+
+	private static IMemberDaoImpl dao;
+	private SqlMapClient client;
+	
+	private IMemberDaoImpl() {
+		client=BuildedSqlMapConfig.getInstance();
+	}
+	
+	public static IMemberDao getInstance() {
+		if(dao==null) {
+			dao=new IMemberDaoImpl();
+		}
+		return dao;
+	}
+
+	@Override
+	public int checkDuplication(String id) throws SQLException {
+		int chk = (int) client.queryForObject("member.checkDuplication", id);
+		return chk;
+	}
+}

@@ -1,0 +1,400 @@
+package roomInfo.view;
+
+import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+
+import data.MIColor;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.web.WebView;
+import main.view.BuildedSqlMapConfig;
+import main.view.MainViewController;
+import roomInfo.service.IRoomInfoService;
+import roomInfo.service.RoomInfoServiceImpl;
+import searchRoom.service.SearchRoomServiceImpl;
+import vo.LikeVO;
+import vo.MemberVO;
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public class RoomInfoController implements Initializable {
+	RoomVO currentRoom;
+	
+	final String ROOM_SIZE_METER = "m²";
+	final String ROOM_SIZE_PYONG = "평";
+	
+	String sizeText = ROOM_SIZE_METER;
+	
+	SqlMapClient smc = BuildedSqlMapConfig.getInstance();
+
+	List<RoomImgVO> images = null;
+	
+	int currentImageIndex = 0;
+	
+	int like_count = 0;
+	
+	IRoomInfoService service = RoomInfoServiceImpl.getInstance();
+	
+	@FXML
+	private Label lbSize;
+	
+	@FXML
+    private Label lbView;
+
+	@FXML
+	private Label lbVeranda;
+
+	@FXML
+	private Label lbRoomSize;
+
+	@FXML
+	private Label lbParking;
+
+	@FXML
+	private JFXButton onRealtorInfoClick;
+	
+	@FXML
+	JFXButton btnList;
+
+	@FXML
+	private Label lbDeposit;
+
+	@FXML
+	private Label lbLeaseFund;
+
+	@FXML
+	private Label lbHeating;
+
+	@FXML
+	private WebView wbRoomLocation;
+
+	@FXML
+	private Label lbRoomPrice;
+
+	@FXML
+	private ImageView ivRoomImage;
+
+	@FXML
+	private JFXTextArea taRoomContent;
+
+	@FXML
+	private Label lbPet;
+
+	@FXML
+	private Label lbRoomSizeType;
+
+	@FXML
+	private Label lbRoomFloor;
+
+	@FXML
+	private TextField tfRoomTitle;
+
+	@FXML
+	private Label lbRoomTransaction;
+
+	@FXML
+	private Label lbAvailable;
+
+	@FXML
+	private Label lbMonthPrice;
+	
+	@FXML
+	private Label lbFullPrice;
+	
+	@FXML
+	private HBox hbOptionContainer;
+	
+	@FXML
+	Label lbLikes;
+	
+	@FXML
+	JFXButton btnLike;
+	
+	/**
+	 * 단위 면적 표기 변경 클릭시
+	 * @param event
+	 */
+	@FXML
+	void onChangeSizeClick(ActionEvent event) {
+		if(sizeText.equals(ROOM_SIZE_PYONG)) {
+			sizeText = ROOM_SIZE_METER;
+			lbRoomSize.setText(Math.round(currentRoom.getRoom_size() * 0.3025f) + sizeText);
+			lbSize.setText(Math.round(currentRoom.getRoom_size() * 0.3025f) + sizeText);
+		}else {
+			sizeText = ROOM_SIZE_PYONG;
+			lbRoomSize.setText(Math.round(currentRoom.getRoom_size() * 3.305785f) + sizeText);
+			lbSize.setText(Math.round(currentRoom.getRoom_size() * 3.305785f) + sizeText);
+		}
+		lbRoomSizeType.setText(sizeText);
+	}
+
+	@FXML
+	void onHeartClick(ActionEvent event) {
+		MemberVO currentMember = MainViewController.getCurrentMember();
+		// 로그인을 안했을 시 null이 넘어온다.
+		if(currentMember == null) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("니방내방");
+			alert.setHeaderText("Oops!");
+			alert.setContentText("먼저 로그인을 해주세요.");
+			alert.showAndWait();
+			return;
+		}
+		Map<String, Object> param = new HashMap<>();
+		param.put("mem_id", currentMember.getMem_id());
+		param.put("room_id", currentRoom.getRoom_id());
+		
+		
+		try {
+			int memLikeRoom = service.memLikeRoom(param);
+			if(memLikeRoom == 0) {
+				LikeVO lv = new LikeVO();
+				lv.setLike_date(new Date(Calendar.getInstance().getTime().getTime()));
+				lv.setMem_id(currentMember.getMem_id());
+				lv.setRoom_id(currentRoom.getRoom_id());
+				btnLike.setTextFill(Paint.valueOf(MIColor.DEFAULT_BLUE));
+				service.insertLike(lv);
+			}else {
+				LikeVO lv = (LikeVO)smc.queryForObject("roomInfo.getLike", param);
+				service.deleteLike(lv.getLike_id());
+				btnLike.setTextFill(Paint.valueOf(MIColor.BLUE_GRAY));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		updateLikeCount(currentRoom.getRoom_id());
+	}
+	
+	/**
+	 * 좋아요 버튼 색상 조정
+	 */
+	private void setLikeColor() {
+		MemberVO currentMember = MainViewController.getCurrentMember();
+		// 로그인을 안했을 시 null이 넘어온다.
+		if(currentMember == null) {
+			return;
+		}
+		Map<String, Object> param = new HashMap<>();
+		param.put("mem_id", currentMember.getMem_id());
+		param.put("room_id", currentRoom.getRoom_id());
+		try {
+			int memLikeRoom = service.memLikeRoom(param);
+			if(memLikeRoom == 0) {
+				LikeVO lv = new LikeVO();
+				lv.setLike_date(new Date(Calendar.getInstance().getTime().getTime()));
+				lv.setMem_id(currentMember.getMem_id());
+				lv.setRoom_id(currentRoom.getRoom_id());
+				btnLike.setTextFill(Paint.valueOf(MIColor.BLUE_GRAY));
+			}else {
+				LikeVO lv = (LikeVO)smc.queryForObject("roomInfo.getLike", param);
+				btnLike.setTextFill(Paint.valueOf(MIColor.DEFAULT_BLUE));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	/**
+	 * 좋아요 갯수를 업데이트한다.
+	 * @param roomId
+	 */
+	private void updateLikeCount(int roomId) {
+		like_count = service.getLikeCount(roomId);
+		lbLikes.setText(like_count + "");
+	}
+
+	/**
+	 * 신고 버튼 클릭시
+	 * @param event
+	 */
+	@FXML
+	void onReportClick(ActionEvent event) {
+		
+	}
+
+	/**
+	 * 방 이미지에서 왼쪽을 눌렀을 때
+	 * @param event
+	 */
+	@FXML
+	void onRoomImageLeftClick(ActionEvent event) {
+		int arrSize = images.size();
+		currentImageIndex = (currentImageIndex + arrSize -1)%arrSize;
+		ivRoomImage.setImage(new Image(images.get(currentImageIndex).getImg_uri()));
+	}
+
+	/**
+	 * 방 이미지에서 오른쪽을 눌렀을 때
+	 * @param event
+	 */
+	@FXML
+	void onRoomImageRightClick(ActionEvent event) {
+		int arrSize = images.size();
+		currentImageIndex = (currentImageIndex + 1)%arrSize;
+		ivRoomImage.setImage(new Image(images.get(currentImageIndex).getImg_uri()));
+	}
+	
+	/**
+	 * 공실 기본정보 세팅
+	 * @param currentRoomVO
+	 */
+	public void setRoomVO(RoomVO currentRoomVO) {
+		this.currentRoom = currentRoomVO;
+		
+		updateLikeCount(currentRoom.getRoom_id());
+		
+		lbSize.setText(currentRoom.getRoom_size() + " " + sizeText);
+		lbVeranda.setText((currentRoom.getOpt_veranda() == 1) ? "있음" : "없음");
+		lbRoomSize.setText(currentRoom.getRoom_size() + " " + sizeText);
+		lbParking.setText((currentRoom.getOpt_parking_lot()==1) ? "있음" : "없음");
+		lbDeposit.setText(currentRoom.getRoom_deposit() + "만원");
+		lbLeaseFund.setText((currentRoom.getOpt_lease_fund()==1)?"가능":"불가능");
+		lbHeating.setText(currentRoom.getRoom_heating_system());
+		lbRoomPrice.setText(currentRoom.getRoom_price() + "만원");
+		taRoomContent.setText(currentRoom.getRoom_comment());
+		lbPet.setText((currentRoom.getOpt_pet_availabillity())==1?"가능":"불가능");
+		lbRoomSizeType.setText(sizeText);
+		lbRoomFloor.setText(currentRoom.getRoom_my_floor() + " / " + currentRoom.getRoom_floor());
+		tfRoomTitle.setText(currentRoom.getRoom_name());
+		lbRoomTransaction.setText(currentRoom.getRoom_transaction());
+		lbAvailable.setText((currentRoom.getRoom_available())==1?"가능":"불가능");
+		
+		if(currentRoomVO.getRoom_transaction().equals("월세")) {
+			lbMonthPrice.setText("월 " + currentRoomVO.getRoom_price() + "만원");
+		}else if(currentRoomVO.getRoom_transaction().equals("전세")) {
+			lbFullPrice.setText("전세 " + currentRoomVO.getRoom_price() + "만원");
+		}
+		
+		Map<String, String> resultMap = SearchRoomServiceImpl.getInstance().getLatLng(currentRoomVO.getRoom_addr1());
+		if(resultMap==null) {
+			wbRoomLocation.getEngine().load("http://yyy9942.cafe24.com/ddit/DaumMap.html");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("검색 결과");
+			alert.setContentText("잘못된 주소를 입력하셨습니다");
+			alert.show();
+		}else {
+			String lat = resultMap.get("lat");
+			String lng = resultMap.get("lng");
+			
+			wbRoomLocation.getEngine().load("http://yyy9942.cafe24.com/ddit/searchMapBig.html?lat="+lat+"&lng="+lng);
+		}
+		
+		try {
+			images = smc.queryForList("roomInfo.getRoomImages",currentRoom.getRoom_id());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		ivRoomImage.setImage(new Image(images.get(0).getImg_uri()));
+		
+		
+		// 여기서부터는 옵션을 줍니다
+		
+		// 에어컨
+		if(currentRoom.getOpt_airconditioner()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_aircon.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		// 침대
+		if(currentRoom.getOpt_bed()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_bed.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		// 옷장
+		if(currentRoom.getOpt_closet()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_closet.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		// 책상
+		if(currentRoom.getOpt_desk()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_desk.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		// 주차여부
+		if(currentRoom.getOpt_parking_lot()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_parking.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		// 냉장고
+		if(currentRoom.getOpt_refregerator()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_refrigerator.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		// 가스레인지
+		if(currentRoom.getOpt_stove()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_stove.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		
+		// TV
+		if(currentRoom.getOpt_tv()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_tv.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+		// 베란다
+		if(currentRoom.getOpt_veranda()==1) {
+			ImageView iv = new ImageView();
+			iv.setFitHeight(100);
+			iv.setFitWidth(100);
+			iv.setImage(new Image("file:./src/res/opt_icon/opt_veranda.png"));
+			hbOptionContainer.getChildren().add(iv);
+		}
+
+		setLikeColor();
+		
+		
+		// 뷰 횟수를 조회한다.
+		lbView.setText(service.getRoomView(currentRoomVO.getRoom_id())+"");
+	}
+
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+}

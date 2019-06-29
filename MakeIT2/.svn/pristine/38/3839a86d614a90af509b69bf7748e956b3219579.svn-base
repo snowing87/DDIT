@@ -1,0 +1,115 @@
+package siteInfo.service;
+
+import java.sql.SQLException;
+
+import javafx.collections.ObservableList;
+import siteInfo.dao.ISiteInfoDao;
+import siteInfo.dao.ISiteInfoDaoImpl;
+import vo.BoardVO;
+import vo.CommentVO;
+
+public class ISiteInfoServiceImpl implements ISiteInfoService {
+	
+	private static ISiteInfoServiceImpl service;
+	private ISiteInfoDao dao;
+	
+	private ISiteInfoServiceImpl() {
+		dao=ISiteInfoDaoImpl.getInstance();
+	}
+	
+	public static ISiteInfoService getInstance() {
+		if(service==null) {
+			service = new ISiteInfoServiceImpl();
+		}
+		return service;
+	}
+	
+	@Override
+	public int upload(BoardVO bv) {
+		int cnt = 0;
+		try {
+			cnt = dao.upload(bv);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
+	@Override
+	public ObservableList<BoardVO> getNoticeBoardList() {
+		ObservableList<BoardVO> ol = null;
+		try {
+			ol = dao.getNoticeBoardList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ol;
+	}
+
+	@Override
+	public int editArticle(BoardVO bv) {
+		int cnt=0;
+		try {
+			cnt=dao.editArticle(bv);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public int deleteArticle(BoardVO bv) {
+		int cnt=0;
+		try {
+			cnt = dao.deleteArticle(bv);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public ObservableList<BoardVO> getFrequentQustionBoardList() {
+		ObservableList<BoardVO> ol = null;
+		try {
+			ol = dao.getFrequentQustionBoardList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ol;
+	}
+
+	@Override
+	public int checkCommentExist(String mem_id) {
+		int chk=0;
+		try {
+			chk = dao.checkCommentExist(mem_id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return chk;
+	}
+
+	@Override
+	public int addComment(CommentVO cv) {
+		int cnt=0;
+		try {
+			cnt = dao.addComment(cv);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public ObservableList<CommentVO> getCommentList() {
+		ObservableList<CommentVO> list = null;
+		try {
+			list = dao.getCommentList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+}

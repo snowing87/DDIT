@@ -1,0 +1,83 @@
+package member.mypage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import main.view.BuildedSqlMapConfig;
+import main.view.MainViewController;
+import vo.MemberVO;
+
+public class MemberMyPageController implements Initializable{
+	MemberVO currentMember = MainViewController.getCurrentMember();
+	SqlMapClient smc = BuildedSqlMapConfig.getInstance();
+	@FXML
+    private JFXComboBox<String> CbPhone1;
+
+    @FXML
+    private JFXButton btnPhone;
+
+    @FXML
+    private JFXTextField tfPhone3;
+
+    @FXML
+    private JFXTextField tfPhone2;
+
+    @FXML
+    private JFXComboBox<String> cbMemberType;
+
+    @FXML
+    private JFXTextField tfCurrentPw;
+
+    @FXML
+    private JFXTextField tfUpdatePw;
+
+    @FXML
+    private JFXTextField tfEmail;
+
+    @FXML
+    private JFXTextField tfMemberName;
+
+    @FXML
+    void onPhoneClick(ActionEvent event) {
+    }
+    
+    @FXML
+    void onCancelClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onCommitClick(ActionEvent event) {
+
+    }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ObservableList<String> phoneList = FXCollections.observableArrayList();
+		ObservableList<String> authList = FXCollections.observableArrayList();
+		phoneList.addAll("010", "011", "016", "017", "018", "019");
+		authList.addAll("admin", "owner", "default");
+		CbPhone1.setItems(phoneList);
+		cbMemberType.setItems(authList);
+		cbMemberType.getSelectionModel().select(authList.indexOf(currentMember.getMem_auth()));
+		cbMemberType.setEditable(false);
+		cbMemberType.setDisable(true);
+		tfEmail.setText(currentMember.getMem_mail());
+		tfMemberName.setText(currentMember.getMem_name());
+		String[] phone = currentMember.getMem_phone().split("-");
+		CbPhone1.getSelectionModel().select(phoneList.indexOf(phone[0]));
+		tfPhone2.setText(phone[1]);
+		tfPhone3.setText(phone[2]);
+		
+	}
+}

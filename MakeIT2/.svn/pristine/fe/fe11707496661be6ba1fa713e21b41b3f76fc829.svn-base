@@ -1,0 +1,18 @@
+package owner.service;
+
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+public interface IRegistRoomService {
+	
+	public int insertRegistRoom(RoomVO rv);
+	
+	// 이미지 사진 등록1
+	public int insertImageUpload1(RoomImgVO riv);
+	// 이미지 사진 등록2
+	public int insertImageUpload2(RoomImgVO riv);
+	// 이미지 사진 등록3
+	public int insertImageUpload3(RoomImgVO riv);
+	
+	public String getAddress(String searchStr);
+}

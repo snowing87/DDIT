@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.web.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<VBox fx:controller="owner.registRoom.RegistRoomController" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1600.0" minHeight="-Infinity" minWidth="1600.0" spacing="50.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="방 내놓기">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER">
+         <children>
+            <JFXButton maxHeight="45.0" maxWidth="600.0" minHeight="45.0" minWidth="600.0" text="방 내놓기">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton maxHeight="45.0" maxWidth="600.0" minHeight="45.0" minWidth="600.0" text="내 방 관리">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER_LEFT" maxWidth="1200.0" minWidth="1200.0" spacing="20.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <Label text=" - 등록한 매물은 30일 동안 노출됩니다.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text=" - 등록한 매물은 30일 동안 노출됩니다.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox maxWidth="1200.0" minWidth="1200.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <AnchorPane maxHeight="50.0" maxWidth="1200.0" minHeight="50.0" minWidth="1200.0">
+               <children>
+                  <Label layoutX="550.0" maxHeight="50.0" minHeight="50.0" text="매물 종류">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="종류 선택" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="원룸">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="투룸">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="쓰리룸">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" style="-fx-border-color: #aeaeae;" text="오피스텔(도시형)">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="아파트">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="건물 유형" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="단독주택">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="130.0" minHeight="45.0" minWidth="130.0" style="-fx-border-color: #aeaeae;" text="다가구주택">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="180.0" minHeight="45.0" minWidth="180.0" style="-fx-border-color: #aeaeae;" text="빌라/연립/다세대">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="상가주택">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox maxWidth="1200.0" minWidth="1200.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <AnchorPane maxHeight="50.0" maxWidth="1200.0" minHeight="50.0" minWidth="1200.0">
+               <children>
+                  <Label layoutX="900.0" layoutY="20.0" text="*등기부등본 상의 주소를 입력해 주세요." textFill="#aeaeae">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="550.0" layoutY="10.0" maxHeight="35.0" minHeight="35.0" text="위치 정보">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT" maxWidth="1200.0" minWidth="1200.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="150.0" minWidth="150.0" text="주소">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox maxWidth="650.0" minWidth="650.0" spacing="10.0">
+                     <children>
+                        <Label text="도로명, 건물명, 지번에 대해 통합검색이 가능합니다." textFill="#9a9a9a">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" maxHeight="45.0" minHeight="45.0" spacing="10.0">
+                           <children>
+                              <JFXTextField maxHeight="45.0" maxWidth="500.0" minHeight="45.0" minWidth="500.0" style="-fx-border-color: #9a9a9a;" />
+                              <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-background-color: #1c33ff;" text="주소검색" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER_LEFT" maxHeight="100.0" maxWidth="610.0" minHeight="100.0" minWidth="610.0" spacing="10.0" style="-fx-border-color: #9a9a9a;">
+                           <children>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label maxHeight="25.0" maxWidth="80.0" minHeight="25.0" minWidth="80.0" text="도로명 : " textFill="#9a9a9a">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label maxHeight="25.0" minHeight="25.0" text="도로명 주소" textFill="#9a9a9a">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label maxHeight="25.0" maxWidth="80.0" minHeight="25.0" minWidth="80.0" text="지번 : " textFill="#9a9a9a">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label maxHeight="25.0" minHeight="25.0" text="지번 주소" textFill="#9a9a9a">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="300.0" style="-fx-border-color: #9a9a9a;">
+                                 <children>
+                                    <JFXTextField maxHeight="45.0" maxWidth="250.0" minHeight="45.0" minWidth="250.0" promptText="예) 101동" unFocusColor="BLACK">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <Label alignment="CENTER" maxHeight="45.0" maxWidth="70.0" minHeight="45.0" minWidth="70.0" text="동" textFill="#9a9a9a">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="300.0" style="-fx-border-color: #9a9a9a;">
+                                 <children>
+                                    <JFXTextField maxHeight="45.0" maxWidth="250.0" minHeight="45.0" minWidth="250.0" promptText="예) 201호" unFocusColor="BLACK">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <Label alignment="CENTER" maxHeight="45.0" maxWidth="70.0" minHeight="45.0" minWidth="70.0" text="호" textFill="#9a9a9a">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <JFXCheckBox text="등본에 동정보가 없는 경우 선택해주세요.">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <JFXButton text="주소가 검색되지 않으세요?" textFill="#1c33ff" underline="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <WebView maxHeight="300.0" maxWidth="370.0" minHeight="300.0" minWidth="370.0" prefHeight="-1.0" prefWidth="-1.0" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox maxWidth="1200.0" minWidth="1200.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <AnchorPane maxHeight="50.0" maxWidth="1200.0" minHeight="50.0" minWidth="1200.0">
+               <children>
+                  <Label layoutX="550.0" maxHeight="50.0" minHeight="50.0" text="거래 정보">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0" spacing="15.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" text="거래 종류" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="월세">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="전세">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXCheckBox maxWidth="150.0" minWidth="150.0" text="단기가능">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXCheckBox>
+                  <Label text="*처음에 선택한 거래종류가 우선노출됩니다. 예치금이 있는 경우 보증금 입력란에 필히 입력하세요." textFill="#aeaeae">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox maxWidth="1200.0" minWidth="1200.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <AnchorPane maxHeight="50.0" maxWidth="1200.0" minHeight="50.0" minWidth="1200.0">
+               <children>
+                  <Label layoutX="550.0" maxHeight="50.0" minHeight="50.0" text="기본 정보">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label alignment="CENTER" maxHeight="150.0" maxWidth="200.0" minHeight="120.0" minWidth="150.0" text="종류 선택" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                           <children>
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="80.0" text="공급면적">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField maxHeight="45.0" maxWidth="50.0" minHeight="45.0" minWidth="100.0" />
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="40.0" text="평">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField maxHeight="45.0" maxWidth="50.0" minHeight="45.0" minWidth="100.0" />
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="40.0" text="m">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                           <children>
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="80.0" text="공급면적">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField maxHeight="45.0" maxWidth="50.0" minHeight="45.0" minWidth="100.0" />
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="40.0" text="평">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField maxHeight="45.0" maxWidth="50.0" minHeight="45.0" minWidth="100.0" />
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="40.0" text="m">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Label alignment="CENTER" maxHeight="150.0" maxWidth="200.0" minHeight="120.0" minWidth="150.0" text="건물 층수" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                           <children>
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="80.0" text="건물 층수">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox maxHeight="45.0" maxWidth="200.0" minHeight="45.0" minWidth="200.0" promptText="건물 층수 선택" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                           <children>
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="80.0" text="해당 층수">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox maxHeight="45.0" maxWidth="200.0" minHeight="45.0" minWidth="200.0" promptText="해당 층수 선택" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="난방 종류" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox maxHeight="45.0" maxWidth="200.0" minHeight="45.0" minWidth="200.0" promptText="난방 종류 선택" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="입주 가능일" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="즉시 입주" textFill="#aeaeae">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="날짜 협의" textFill="#aeaeae">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="날짜 선택" textFill="#aeaeae">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox maxWidth="1200.0" minWidth="1200.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <AnchorPane maxHeight="50.0" maxWidth="1200.0" minHeight="50.0" minWidth="1200.0">
+               <children>
+                  <Label layoutX="550.0" maxHeight="50.0" minHeight="50.0" text="추가 정보">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label alignment="CENTER" maxHeight="140.0" maxWidth="200.0" minHeight="140.0" minWidth="150.0" text="관리비" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" selected="true" style="-fx-border-color: #aeaeae;" text="없음" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toggleMaintenance" />
+                                 </toggleGroup>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="있음" textFill="#686868" toggleGroup="$toggleMaintenance">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXTextField maxHeight="45.0" minHeight="45.0" />
+                              <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="40.0" text="만원">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                           <children>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label alignment="CENTER" text="관리비항목">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" text="(다중선택가능)">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="인터넷" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="유선TV" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="청소기" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="수도세" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="100.0" minHeight="35.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="도시가스" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="전기세" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="기타" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="주차여부" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                     <children>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" selected="true" style="-fx-border-color: #aeaeae;" text="불가능" textFill="#686868">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleParking" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="가능" textFill="#686868" toggleGroup="$toggleParking">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXToggleNode>
+                        <JFXTextField maxHeight="45.0" minHeight="45.0" />
+                        <Label alignment="CENTER" maxHeight="45.0" minHeight="45.0" minWidth="40.0" text="만원">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="반려동물" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                     <children>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" selected="true" style="-fx-border-color: #aeaeae;" text="불가능" textFill="#686868">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="togglePet" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="가능" textFill="#686868" toggleGroup="$togglePet">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXToggleNode>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="엘리베이터" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                     <children>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" selected="true" style="-fx-border-color: #aeaeae;" text="없음" textFill="#686868">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleElevator" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="있음" textFill="#686868" toggleGroup="$toggleElevator">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXToggleNode>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="베란다/발코니" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                     <children>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" selected="true" style="-fx-border-color: #aeaeae;" text="없음" textFill="#686868">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleBalcony" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="있음" textFill="#686868" toggleGroup="$toggleBalcony">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXToggleNode>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="빌트인" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                     <children>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" selected="true" style="-fx-border-color: #aeaeae;" text="없음" textFill="#686868">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleBuiltIn" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="있음" textFill="#686868" toggleGroup="$toggleBuiltIn">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXToggleNode>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="구조" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                     <children>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="복층" textFill="#686868">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleRoomStructure" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="200.0" minHeight="45.0" minWidth="200.0" style="-fx-border-color: #aeaeae;" text="1.5룸/주방분리형" textFill="#686868" toggleGroup="$toggleRoomStructure">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXToggleNode>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label alignment="CENTER" maxHeight="120.0" maxWidth="200.0" minHeight="120.0" minWidth="150.0" text="옵션가능" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <VBox maxHeight="120.0" minHeight="120.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0" minWidth="450.0" spacing="10.0">
+                           <children>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="에어컨" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="세탁기" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="침대" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="책상" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="100.0" minHeight="35.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="옷장" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="TV" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="신발" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="냉장고" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="인덕션" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="80.0" minHeight="35.0" minWidth="80.0" style="-fx-border-color: #aeaeae;" text="비데" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0" minWidth="450.0" spacing="10.0">
+                           <children>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="120.0" style="-fx-border-color: #aeaeae;" text="가스레인지" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="120.0" style="-fx-border-color: #aeaeae;" text="전자레인지" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                              <JFXToggleNode maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="120.0" style="-fx-border-color: #aeaeae;" text="전자도어락" textFill="#686868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXToggleNode>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="60.0" minHeight="60.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="150.0" text="전세자금대출" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" minWidth="450.0" spacing="10.0">
+                     <children>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" selected="true" style="-fx-border-color: #aeaeae;" text="불가능" textFill="#686868">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleLoan" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode maxHeight="45.0" maxWidth="100.0" minHeight="45.0" minWidth="100.0" style="-fx-border-color: #aeaeae;" text="가능" textFill="#686868" toggleGroup="$toggleLoan">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXToggleNode>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox maxWidth="1200.0" minWidth="1200.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <AnchorPane maxHeight="50.0" maxWidth="1200.0" minHeight="50.0" minWidth="1200.0">
+               <children>
+                  <Label layoutX="550.0" maxHeight="50.0" minHeight="50.0" text="상세 설명">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label alignment="CENTER" maxHeight="60.0" maxWidth="200.0" minHeight="60.0" minWidth="150.0" text="제목" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1050.0" minWidth="1050.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <JFXTextField maxHeight="45.0" maxWidth="1000.0" minHeight="45.0" minWidth="1000.0" promptText="예)신논현역 도보 5분거리, 혼자살기 좋은 방입니다." style="-fx-border-color: #aeaeae;">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label alignment="CENTER" maxHeight="60.0" maxWidth="200.0" minHeight="60.0" minWidth="150.0" text="상세 설명" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1050.0" minWidth="1050.0" spacing="10.0">
+                     <children>
+                        <JFXTextArea maxHeight="200.0" maxWidth="1000.0" minHeight="200.0" minWidth="1000.0" promptText="상세 설명 작성 주의사항\n\n- 방 정보와 관련없는 홍보성 정보는 입력하실 수 없습니다.(홈페이지 주소, 블로그, SNS, 메신저ID, 전화번호, 이메일 등)\n- 중개수수료를 언급한 내용은 입력할 수 없습니다.(중개수수료 무료, 꽁짜, 반값 등)\n\n*주의사항 위반시 허위매물로 간주되어 매물 삭제 및 이용의 제한이 있을 수 있습니다." style="-fx-border-color: #aeaeae;">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextArea>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label alignment="CENTER" maxHeight="60.0" maxWidth="200.0" minHeight="60.0" minWidth="150.0" text="비공개 메모" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1050.0" minWidth="1050.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <JFXTextArea maxHeight="100.0" maxWidth="1000.0" minHeight="100.0" minWidth="1000.0" promptText="외부에 공개되지 않으며, 등록자에게만 보이는 메모입니다." style="-fx-border-color: aeaeae;">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextArea>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox maxWidth="1200.0" minWidth="1200.0" style="-fx-border-color: #aeaeae;">
+         <children>
+            <AnchorPane maxHeight="50.0" maxWidth="1200.0" minHeight="50.0" minWidth="1200.0">
+               <children>
+                  <Label layoutX="550.0" maxHeight="50.0" minHeight="50.0" text="사진 정보">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <VBox alignment="TOP_CENTER" maxWidth="1200.0" minWidth="1200.0" spacing="20.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" maxWidth="1160.0" minWidth="1160.0" spacing="10.0" style="-fx-border-color: #aeaeae;">
+                     <children>
+                        <Label text="- 사진은 가로로 찍은 사진을 권장합니다. (가로 사이즈 최소 800px)">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="- 사진 용량은 사진 한 장당 10MB 까지 등록이 가능합니다.">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="- 사진은 최소 1장 이상 등록해야하며, 최대 3장 까지 권장합니다. 그 이상 등록할 경우 업로드 시간이 다소 지연될 수 있습니다.">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="- 니방 내방 로고를 제외한 불필요한 정보(워터마크, 상호, 전화번호 등)가 있는 매물은 비공개 처리 됩니다." textFill="RED">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1160.0" minWidth="1160.0" prefHeight="350.0" spacing="1.0" style="-fx-border-color: #aeaeae;">
+                     <children>
+                        <ImageView fitHeight="350.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="350.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="350.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <JFXButton maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" style="-fx-background-color: #1c33ff;" text="사진등록" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <HBox>
+                     <children>
+                        <Label text="*허위 매물을 등록할 경우 니방에서 임의로 계정 및 매물 전체를 삭제처리합니다." textFill="#aeaeae">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXButton text="허위매물 매매정책 확인하기" textFill="#1c33ff" underline="true" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="30.0" />
+         </VBox.margin>
+      </VBox>
+      <JFXCheckBox checkedColor="#1c33ff" text="매물관리규정을 확인하였으며, 입력한 정보는 실제 매물과 다름없습니다.">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <HBox alignment="CENTER" spacing="15.0">
+         <children>
+            <JFXButton maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" style="-fx-border-color: #aeaeae;" text="취소">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton maxHeight="45.0" maxWidth="150.0" minHeight="45.0" minWidth="150.0" style="-fx-background-color: #1c33ff;" text="매물등록" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <VBox.margin>
+            <Insets bottom="100.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="50.0" top="50.0" />
+   </padding>
+</VBox>

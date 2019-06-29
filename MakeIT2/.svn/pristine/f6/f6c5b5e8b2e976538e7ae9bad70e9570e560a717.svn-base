@@ -1,0 +1,48 @@
+package siteInfo.service;
+
+import java.sql.SQLException;
+
+import javafx.collections.ObservableList;
+import siteInfo.dao.ISiteInfoDao;
+import siteInfo.dao.ISiteInfoDaoImpl;
+import vo.BoardVO;
+
+public class ISiteInfoServiceImpl implements ISiteInfoService {
+	
+	private static ISiteInfoServiceImpl service;
+	private ISiteInfoDao dao;
+	
+	private ISiteInfoServiceImpl() {
+		dao=ISiteInfoDaoImpl.getInstance();
+	}
+	
+	public static ISiteInfoService getInstance() {
+		if(service==null) {
+			service = new ISiteInfoServiceImpl();
+		}
+		return service;
+	}
+
+	@Override
+	public int upload(BoardVO bv) {
+		int cnt = 0;
+		try {
+			cnt = dao.upload(bv);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public ObservableList<BoardVO> getNoticeBoardList() {
+		ObservableList<BoardVO> ol = null;
+		try {
+			ol = dao.getNoticeBoardList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ol;
+	}
+	
+}

@@ -1,0 +1,159 @@
+package owner.dao;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.SQLException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import main.view.BuildedSqlMapConfig;
+import vo.RoomImgVO;
+import vo.RoomVO;
+
+/**
+ * 방을 관리하는 기능(방등록, 방수정, 방삭제, 방조회)
+ * 
+ * @author 윤홍식
+ *
+ */
+public class RegistRoomDaoImpl implements IRegistRoomDao {
+	private static IRegistRoomDao dao = new RegistRoomDaoImpl();
+	private SqlMapClient client;
+
+	// main.view패키지에있는 BuildedSqlMapConfig를 불러와 간편하게 연결
+	private RegistRoomDaoImpl() {
+		client = BuildedSqlMapConfig.getInstance();
+	}
+
+	public static IRegistRoomDao getInstance() {
+		return dao;
+	}
+
+	/**
+	 * 방을 등록하는 메서드
+	 */
+	@Override
+	public int insertRegistRoom(RoomVO rv) {
+		int cnt = 0;
+
+		try {
+			Object obj = client.insert("room.insertroom", rv);
+			if (obj == null) {
+				cnt = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		} finally {
+			return cnt;
+		}
+	}
+	
+	@Override
+	public String getAddress(String searchStr) {
+		String addr = "";
+		searchStr = searchStr.replaceAll(" ", "%20");
+		String urlLink = "https://maps.googleapis.com/maps/api/geocode/json?address=" + searchStr
+				+ "&key=AIzaSyCiNE-lKV0z0cU8WCjFDw72ojQ0POpY-Po";
+		try {
+			URL url = new URL(urlLink);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+
+	
+
+			BufferedReader bin = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuffer sb = new StringBuffer();
+			String line;
+
+			while ((line = bin.readLine()) != null) {
+				sb.append(line);
+			}
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObj;
+			jsonObj = (JSONObject) jsonParser.parse(sb.toString());
+
+			JSONArray jsonArray = (JSONArray) jsonObj.get("results");
+			
+			JSONObject tempObj = (JSONObject) jsonArray.get(0);
+			addr = (String)tempObj.get("formatted_address");
+
+			System.out.println(addr);
+			
+			
+
+		} catch(IndexOutOfBoundsException e) {
+			return null;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return addr;
+	}
+
+	/**
+	 * 첫번째 이미지 사진 업로드
+	 */
+	@Override
+	public int insertImageUpload1(RoomImgVO riv) {
+		int cnt = 0;
+
+		try {
+			Object obj = client.insert("room.insertImage", riv);
+			if (obj == null) {
+				cnt = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		} finally {
+			return cnt;
+		}
+	}
+
+	/**
+	 * 두번째 이미지 사진 업로드
+	 */
+	@Override
+	public int insertImageUpload2(RoomImgVO riv) {
+		int cnt = 0;
+
+		try {
+			Object obj = client.insert("room.insertroom", riv);
+			if (obj == null) {
+				cnt = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		} finally {
+			return cnt;
+		}
+	}
+	
+	/**
+	 * 세번째 이미지 사진 업로드
+	 */
+	@Override
+	public int insertImageUpload3(RoomImgVO riv) {
+		int cnt = 0;
+
+		try {
+			Object obj = client.insert("room.insertroom", riv);
+			if (obj == null) {
+				cnt = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		} finally {
+			return cnt;
+		}
+	}
+}

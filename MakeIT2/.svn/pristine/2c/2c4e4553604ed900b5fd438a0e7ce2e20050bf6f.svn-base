@@ -1,0 +1,174 @@
+package member.login;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.jfoenix.controls.JFXButton;
+
+import encryption.Encryption;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
+import main.view.BuildedSqlMapConfig;
+import main.view.MainViewController;
+import owner.main.OwnerMainController;
+import vo.MemberVO;
+
+public class LogInController implements Initializable{
+	
+	SqlMapClient smc = null;
+	{
+		smc = BuildedSqlMapConfig.getInstance();
+	}
+	
+	@FXML
+    private JFXButton btnLogin;
+
+    @FXML
+    private JFXButton btnFindPassword;
+
+    @FXML
+    private JFXButton btnLoginByKakao;
+
+    @FXML
+    private JFXButton BtnSignin;
+
+    @FXML
+    private TextField tfId;
+
+    @FXML
+    private JFXButton btnGotoRealtor;
+
+    @FXML
+    private TextField tfPw;
+
+    @FXML
+    private JFXButton btnGotoOwner;
+    
+    /**
+     * 비밀번호 찾기 클릭 이벤트
+     * @param event
+     */
+    @FXML
+    void onFindPasswordClick(ActionEvent event) {
+
+    }
+
+    /**
+     * 로그인 버튼 클릭시
+     * 아이디, 패스워드가 공백인지 검사한 후
+     * 데이터베이스와 연동하여 검사한다.
+     * @param event
+     */
+    @FXML
+    void onLoginClick(ActionEvent event) {
+    	String id = tfId.getText();
+    	String pw = tfPw.getText();
+    	Map<String, String> param = new HashMap<>();
+    	MemberVO currentMember = null;
+    	if(id.isEmpty()) {
+    		Alert idError = new Alert(AlertType.INFORMATION);
+    		idError.setTitle("니방내방");
+    		idError.setContentText("아이디를 먼저 입력해주세요");
+    		idError.showAndWait();
+    		return;
+    	}
+    	
+    	if(pw.isEmpty()) {
+    		Alert idError = new Alert(AlertType.INFORMATION);
+    		idError.setTitle("니방내방");
+    		idError.setContentText("패스워드를 먼저 입력해주세요");
+    		idError.showAndWait();
+    		return;
+    	}
+    	
+    	param.put("mem_id", id);
+    	String shaPass = Encryption.encryptSHA256(pw);
+    	param.put("mem_pw", shaPass);
+    	try {
+    		if(shaPass!=null) {
+			currentMember = (MemberVO) smc.queryForObject("member.logIn",param);
+				if(OwnerMainController.getInstance() != null) {
+					OwnerMainController.getInstance().onLogin();
+				}
+    		} else {
+    			return;
+    		}
+		} catch (SQLException e) {
+			System.out.println("아 실패함");
+			e.printStackTrace();
+		}
+    	
+    	// 로그인 정보가 틀리면 currentMember에 null이 들어온다
+    	if(currentMember == null) {
+    		Alert failLogin = new Alert(AlertType.INFORMATION);
+    		failLogin.setTitle("니방내방");
+    		failLogin.setHeaderText("Oops!");
+    		failLogin.setContentText("로그인 정보가 잘못되었습니다!\n다시 입력해주세요");
+    		failLogin.showAndWait();
+    	}else {
+    		MainViewController.getInstance().onLogIn(currentMember);
+    		((Node)(event.getSource())).getScene().getWindow().hide();
+    	}
+    	
+	
+    }
+
+
+
+    /**
+     * 카카오 로그인 버튼 클릭시
+     * @param event
+     */
+    @FXML
+    void onLoginByKakaoClick(ActionEvent event) {
+    	
+    }
+
+    /**
+     * 회원가입 클릭시
+     * @param event
+     */
+    @FXML
+    void onSigninClick(ActionEvent event) {
+    	
+    }
+
+
+    /**
+     * 중개사세요? 클릭시
+     * @param event
+     */
+    @FXML
+    void onGotoRealtorClick(ActionEvent event) {
+    	
+    }
+
+    /**
+     * 방주인이세요? 클릭시
+     * @param event
+     */
+    @FXML
+    void onGotoOwnerClick(ActionEvent event) {
+    	
+    }
+    
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		
+		
+		
+		
+		
+	}
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+    <sqlMap namespace="member">
+    
+    	<select id="checkDuplication" parameterClass="String" resultClass="int">
+    	
+    		select count(*) as cnt
+    		from MEMBER
+			where mem_id = #id#
+    		
+    	</select>
+    	
+    	<select id="logIn" parameterClass="map" resultClass="vo.MemberVO">
+    	
+    		select *
+    		from MEMBER
+    		where 1=1
+    		and mem_id=#memId#
+    		and mem_pw=#memPw#
+    	
+    	</select>
+    	
+    	<select id="searchMem" parameterClass="String" resultClass="vo.MemberVO">
+    	
+    		select*
+    		from MEMBER
+    		where 1=1
+    		and mem_id = #info#
+    		 or mem_name = #info#
+    	
+    	</select>
+    	
+    
+    </sqlMap>
+    

@@ -1,0 +1,58 @@
+package member.favoriteRoom.view;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXTextArea;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import vo.BoardVO;
+import vo.RoomVO;
+import vo.SearchLogVO;
+
+public class FavoriteCellController implements Initializable{
+	
+	private SearchLogVO currentSearchLogVO;
+	
+    @FXML
+    private JFXTextArea taContent;
+
+    @FXML
+    private ImageView ivRoom;
+
+    @FXML
+    private VBox mainVox;
+
+    @FXML
+    private Label lbTitle;
+
+	SearchLogVO slv;
+	    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/*public void setItem(SearchLogVO slv) {
+		this.slv = slv;
+		String title = slv.//searchlog정보 입력해주세요!
+		lbTitle.setText(title);//searchlog정보 입력해주세요! 지금입력된건 준이의 roomVO입니다.
+		taContent.setText(slv.getRoom_comment());//searchlog정보 입력해주세요!
+	}*/
+	
+	/*public void setItem(BoardVO bv, int no) {
+		currentBoardVO = bv;
+		boardIdNum = no;
+		lbNo.setText(no+"");
+		lbTitle.setText(bv.getBoard_title());
+		lbDate.setText(bv.getBoard_date().toString());
+		lbName.setText(bv.getMem_id());
+		lbCategory.setText(bv.getBoard_category());
+	}*/
+	
+}

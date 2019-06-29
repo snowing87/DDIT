@@ -1,0 +1,50 @@
+package siteInfo.chat;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+
+public class ChatRoomController implements Initializable{
+	
+	@FXML
+    private ImageView imageLogo;
+
+    @FXML
+    private AnchorPane paneReceiver;
+
+    @FXML
+    private JFXButton btnAddImage;
+
+    @FXML
+    private AnchorPane paneSender;
+
+    @FXML
+    private JFXTextArea taContent;
+
+    @FXML
+    private JFXButton btnSend;
+
+    @FXML
+    void onAddImage(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onSend(ActionEvent event) {
+
+    }
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+
+}

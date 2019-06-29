@@ -1,0 +1,113 @@
+package admin.member;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import admin.service.IMemberService;
+import admin.service.MemberServiceImpl;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import main.view.MainView;
+import vo.MemberVO;
+import com.jfoenix.controls.JFXButton;
+
+public class MemberController implements Initializable{
+	
+	@FXML 
+	private BorderPane memberContainer;
+	
+	@FXML 
+	private VBox vboxlist;
+	
+	IMemberService service = MemberServiceImpl.getInstance();
+
+	@FXML JFXButton btn_registerId;
+
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		btn_registerId.setOnAction(e-> {
+			try {
+				Parent root;
+				root = FXMLLoader.load(getClass().getClassLoader().getResource("admin/member/MemberRegister.fxml"));
+				memberContainer.setCenter(root);
+//				Scene scene = new Scene(root);
+//				Stage window = (Stage)btn_registerId.getScene().getWindow();
+//				
+//				window.setScene(scene);
+//				window.show();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+		});
+		
+		/**
+		 * DB에 갱신된 데이터를 불러오는 메서드(연결)
+		 */
+		List<MemberVO> memList = service.getAllMemberList();
+		ObservableList<MemberVO> data = FXCollections.observableArrayList(memList);
+		
+		MemberVO mv = new MemberVO();
+		mv.setMem_id("아이디");
+		mv.setMem_name("이름");
+		data.add(mv);
+			setDataList(data);
+		
+		}
+
+	// 데이터 리스트를 받아와 게시판 형태로 리스트를 만들어주는 메서드
+	public void setDataList(ObservableList<MemberVO> list) {
+		try {
+			FXMLLoader loader;
+			MemberCellController controller;
+			Parent parent;
+			
+			for(int i=0; i<list.size(); i++) {
+				MemberVO mv = list.get(i);
+				loader = new FXMLLoader(getClass().getClassLoader().getResource("admin/member/MemberCell.fxml"));
+				parent = loader.load();
+				
+				controller = loader.getController();
+				controller.setItem(mv, i);
+				
+				vboxlist.getChildren().add(parent);
+				
+				// 실제 적용할 때는 boardId는 DB에서 가져올 것이기 때문에
+				// 따로 세팅하는 작업은 필요없음
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	/*	btn_memId_regiseter.setOnAction(e->{
+			Parent root;
+			try {
+				root = FXMLLoader.load(getClass().getResource("admin/member/MemberRegister.fxml"));
+				//root.getStylesheets().add(getClass().getClassLoader().getResource("admin/css/stylesheet.css").toString());
+				Scene scene = new Scene(root);
+				Stage window =(Stage)btn_memId_regiseter.getScene().getWindow();
+				window.setScene(scene);
+				window.show();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});*/
+	}
+	
+	
+
+}

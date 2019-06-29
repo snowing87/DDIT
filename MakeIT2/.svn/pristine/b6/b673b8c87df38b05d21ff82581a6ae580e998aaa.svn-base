@@ -1,0 +1,45 @@
+package member.service;
+
+import java.util.List;
+import java.util.Map;
+
+import javafx.collections.ObservableList;
+import vo.BoardVO;
+import vo.MemberVO;
+
+public interface IMemberService {
+	
+	/**
+	 * 입력받은 id가 db에 존재하는지 검사하는 메서드
+	 * @author PC-08
+	 * @param id
+	 */
+	int checkDuplication(String id);
+	
+	/**
+	 * 입력받은 회원정보로 회원가입을 하는 메서드
+	 * @author PC-08
+	 * @param mv
+	 */
+	int signUp(MemberVO mv);
+	
+	/**
+	 * 방 주소를 검색해 상세주소를 반환하는 메서드
+	 * @param searchStr
+	 * @return
+	 */
+	public String getAddress(String searchStr);
+	
+	/**
+	 * 자신이 작성한 게시글만 리턴하는 메서드
+	 * @param mem_id
+	 * @return
+	 */
+	ObservableList<BoardVO> getMyBoardList(String mem_id);
+	
+	List<Map<String, Object>> getReceiveContrace(String mem_id); 
+	
+	void newContract(Map<String, Object> param);
+	
+	List<Map<String, Object>> getContract(String mem_id);
+}

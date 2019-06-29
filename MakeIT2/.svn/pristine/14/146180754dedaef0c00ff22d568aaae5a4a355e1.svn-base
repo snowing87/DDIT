@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+    <sqlMap namespace="siteInfo">
+    
+    	<insert id="upload" parameterClass="vo.BoardVO">
+    	
+    		insert into BOARD
+    		(board_title, board_content, board_date, board_category, board_img, mem_id)
+    		values (#board_title#, #board_content#, #board_date#, #board_category#, #board_img#, #mem_id#)
+    	
+    	</insert>
+    	
+    	<select id="showNoticeBoard" resultClass="vo.BoardVO">
+    	
+    		select *
+    		from BOARD
+    		where 1=1
+    		and board_category='공지사항'
+    		order by board_id desc
+    	
+    	</select>
+    	
+    	<select id="showFQBoard" resultClass="vo.BoardVO">
+    	
+    		select *
+    		from BOARD
+    		where 1=1
+    		and board_category='자주 묻는 질문'
+    		order by board_id desc
+    	
+    	</select>
+    	
+    	<update id="editArticle" parameterClass="vo.BoardVO">
+    	
+    		update BOARD
+    		set board_title = #board_title#
+			,board_content = #board_content#
+			,board_date = #board_date#
+			,board_category = #board_category#
+			,board_img = #board_img#
+			,mem_id=#mem_id#
+			where board_id = #board_id#
+    	
+    	</update>
+    	
+    	<delete id="deleteArticle" parameterClass="vo.BoardVO">
+    	
+    		delete from BOARD
+    		where board_id = #board_id#
+    	
+    	</delete>
+    	
+    	
+    </sqlMap>
+    

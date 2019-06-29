@@ -1,0 +1,48 @@
+package owner.dao;
+
+import java.sql.SQLException;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import main.view.BuildedSqlMapConfig;
+import vo.RoomVO;
+/**
+ * 방을 관리하는 기능(방등록, 방수정, 방삭제, 방조회)
+ * @author 윤홍식
+ *
+ */
+public class RegistRoomDaoImpl implements IRegistRoomDao {
+	private static IRegistRoomDao dao = new RegistRoomDaoImpl();
+	private SqlMapClient client;
+	
+	// main.view패키지에있는 BuildedSqlMapConfig를 불러와 간편하게 연결
+	private RegistRoomDaoImpl() {
+		client = BuildedSqlMapConfig.getInstance();
+	}
+	public static IRegistRoomDao getInstance() {
+		return dao;
+	}
+	
+	
+	
+	/**
+	 * 방을 등록하는 메서드
+	 */
+	@Override
+	public int insertRegistRoom(RoomVO rv) {
+		int cnt = 0;
+		
+		try {
+			Object obj = client.insert("room.insertroom",rv);
+			if(obj == null) {
+				cnt = 1;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		}finally {
+			return cnt;
+		}
+	}
+
+}
